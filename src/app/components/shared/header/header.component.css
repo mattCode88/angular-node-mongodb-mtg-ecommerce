@@ -1,0 +1,15 @@
+.header{
+  height: 60px;
+}
+.nav{
+  height: 100%;
+  padding: 0 40px;
+  background-color: black;
+  color: #fff;
+}
+.nav ul:nth-of-type(2)>li{
+  margin-left: 15px;
+}
+li>a{
+  color: #fff;
+}

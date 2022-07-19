@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("./assets/shared-css/lib");
+@import url("./assets/shared-css/variables");
+
+.container-app {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+}
+
