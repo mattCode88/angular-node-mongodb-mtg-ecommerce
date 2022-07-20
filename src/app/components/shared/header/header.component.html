@@ -1,10 +1,13 @@
 <header class="header">
   <nav class="nav flex space-between item-center">
-    <ul><li><a routerLink="/home">HOME</a></li></ul>
+    <ul class="flex item-center">
+      <li *ngIf="authService.isLogged()"><a routerLink="/dashboard"><i class="fa-solid fa-unlock"></i></a></li>
+      <li><a routerLink="/home">HOME</a></li>
+    </ul>
     <ul class="flex item-center">
       <li *ngIf="!authService.isLogged()"><a routerLink="/auth/login">Login</a></li>
       <li *ngIf="!authService.isLogged()"><a routerLink="/auth/register">Register</a></li>
-      <li *ngIf="authService.isLogged()"><a (click)="disconnettiUser()">Logout</a></li>
+      <li *ngIf="authService.isLogged()"><a class="pointer" (click)="disconnettiUser()">Logout</a></li>
     </ul>
   </nav>
 </header>

@@ -4,9 +4,19 @@ const MyValidator = require('../validators/my-validator');
 
 exports.registerUser = async (req, res) => {
 
-  if (req.body.username.length < 3 ||
-    (MyValidator.validaEmail(req.body.email)) ||
-    (MyValidator.validaPassword(req.body.password || req.body.password.length < 8))
+  if (
+    req.body.username.length < 3 ||
+    req.body.password.length < 8 ||
+    req.body.nome.length < 3 ||
+    req.body.cognome.length < 3 ||
+    req.body.citta.length < 3 ||
+    req.body.nazione === '' ||
+    req.body.via === '' ||
+    MyValidator.validaEmail(req.body.email) ||
+    MyValidator.validaPassword(req.body.password) ||
+    MyValidator.validaCap(req.body.cap) ||
+    MyValidator.validaNCivico(req.body.nCivico) ||
+    MyValidator.validaTelefono(req.body.telefono)
   ) {
     const error = {
       status: true,
@@ -35,12 +45,34 @@ exports.registerUser = async (req, res) => {
     return res.send(error)
   }
 
+  const duplicateUserTelefono= await UserCollection.findOne({ telefono: req.body.telefono });
+
+  if (duplicateUserTelefono !== null) {
+    const error = {
+      status: true,
+      message: 'Telefono già registrato'
+    }
+    return res.send(error)
+  }
+
+  const data = new Date();
+  const dataFormattata = `${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()}`;
+
   const hashedPassword = bcrypt.hashSync(req.body.password, 10);
 
   const user = new UserCollection({
     username: req.body.username,
     email: req.body.email,
     password: hashedPassword,
+    telefono: req.body.telefono,
+    nome: req.body.nome.toLowerCase(),
+    cognome: req.body.cognome.toLowerCase(),
+    via: req.body.via.toLowerCase(),
+    nCivico: req.body.nCivico,
+    cap: req.body.cap,
+    citta: req.body.citta.toLowerCase(),
+    nazione: req.body.nazione.toLowerCase(),
+    dataIscrizione: dataFormattata,
     isLogged: false,
   });
 

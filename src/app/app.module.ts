@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoggedInGuard } from './guards/logged-in.guard';
 import { AuthModule } from './modules/auth/auth.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { SharedModule } from './modules/shared/shared.module';
     AppRoutingModule,
     SharedModule,
     AuthModule,
+    DashboardModule,
     HttpClientModule
   ],
   providers: [LoggedInGuard],

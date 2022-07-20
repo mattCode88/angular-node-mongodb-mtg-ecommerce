@@ -37,4 +37,47 @@ export default class AuthValidator {
 
   }
 
+  static validaCap(): ValidatorFn | null {
+
+    const capControl = /^\d{5}$/;
+
+    return (control: AbstractControl): ValidationErrors | null => {
+      const capVerificato = capControl.exec(control.value);
+
+      return capVerificato !== null ? null : { invalidCap: true }
+
+    }
+
+  }
+
+  static validaNCivico(): ValidatorFn | null {
+
+    return (control: AbstractControl): ValidationErrors | null => {
+
+      return Number(control.value) < 1000 ? null : { invalidNCivico: true }
+
+    }
+
+  }
+
+  static validaTelefono(): ValidatorFn | null {
+
+    const cellulareControl: RegExp = /^\d{10}$/,
+      americaControl: RegExp = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
+      internationalControl: RegExp = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+
+    return (control: AbstractControl): ValidationErrors | null => {
+
+      const cellulareVerificato = cellulareControl.exec(control.value),
+        americaVerificato = americaControl.exec(control.value),
+        internationalVerificato = internationalControl.exec(control.value);
+
+      return cellulareVerificato === null || americaVerificato === null || internationalVerificato === null ?
+        { invalidTelefono: true } :
+        null;
+
+    }
+
+  }
+
 }

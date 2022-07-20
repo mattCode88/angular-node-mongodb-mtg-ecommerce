@@ -5,8 +5,9 @@ import { HomePageComponent } from './views/home-page/home-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'home', component: HomePageComponent, canActivate: [LoggedInGuard] },
-  { path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) }
+  { path: 'home', component: HomePageComponent },
+  { path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) },
+  { path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule) },
 ];
 
 @NgModule({
