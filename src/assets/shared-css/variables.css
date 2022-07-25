@@ -1,8 +1,11 @@
 :root {
-  --bg-color-nav: #0c6e52;
-  --hover-color-a: #0b4f3c;
-  --bg-chat-list: #211e1e;
-  --bg-chat-message: #2b2a2a;
-  --color-user-ora: #4CBA9B;
-  --color-data: #BA2A00;
+  --black: #1f1919;
+  --blue-nav: #2d357e;
+  --blue-dark: #1B1F4A;
+  --blue-input: #616693;
+
+  --green: #008F18;
+  --green-hover: #005C0F;
+  --red: crimson;
+  --red-hover: #8F1B32;
 }

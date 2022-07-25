@@ -1,0 +1,14 @@
+<section class="section">
+  <ng-container *ngIf="account">
+    <h2>ACCOUNT</h2>
+    <div><span>USERNAME: </span><span>{{ account.username }}</span></div>
+    <div><span>EMAIL: </span><span>{{ account.email }}</span></div>
+    <h2>INFO ACCOUNT</h2>
+    <div><span>NOME: </span><span>{{ account.nome }}</span></div>
+    <div><span>COGNOME: </span><span>{{ account.cognome }}</span></div>
+    <div><span>TELEFONO: </span><span>{{ account.telefono }}</span></div>
+    <div><span>INDIRIZZO: </span><span>{{ account.via }} {{ account.nCivico }} {{ account.cap }} {{ account.citta }} {{ account.nazione }}</span></div>
+    <div><span>DATA ISCRIZIONE: </span><span>{{ account.dataIscrizione }}</span></div>
+    <button routerLink="/auth/modifica-account">MODIFICA</button>
+  </ng-container>
+</section>

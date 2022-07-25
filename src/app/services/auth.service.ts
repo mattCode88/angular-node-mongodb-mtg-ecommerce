@@ -20,6 +20,10 @@ export class AuthService {
     return this.http.post<IUser>(`${this.ENDPOINT}/auth/register`, user);
   }
 
+  modificaUser(user: IUser, id: string): Observable<any> {
+    return this.http.put<IUser>(`${this.ENDPOINT}/auth/modifica`, [user, id]);
+  }
+
   loginUser(logUser: ILogUser): Observable<MyError> {
     return this.http.post<MyError>(`${this.ENDPOINT}/auth/login`, logUser)
   }

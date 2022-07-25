@@ -1,0 +1,21 @@
+form{
+  width: 100%;
+}
+.input-section{
+  width: 100%;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.btn-section{
+  background-color: var(--blue-nav);
+  border: none;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: all 0.5s;
+}
+.btn-section:hover{
+  background-color: var(--blue-dark);
+}

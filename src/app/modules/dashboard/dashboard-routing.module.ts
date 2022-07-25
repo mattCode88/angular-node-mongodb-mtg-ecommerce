@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountPageComponent } from 'src/app/views/account-page/account-page.component';
 import { LoggedInGuard } from 'src/app/guards/logged-in.guard';
-import { DashboardPageComponent } from 'src/app/views/dashboard-page/dashboard-page.component';
+import { VendiCartePageComponent } from 'src/app/views/vendi-carte-page/vendi-carte-page.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardPageComponent, canActivate: [LoggedInGuard] },
+  { path: 'account', component: AccountPageComponent, canActivate: [LoggedInGuard] },
+  { path: 'vendi-carte', component: VendiCartePageComponent, canActivate: [LoggedInGuard] },
 ];
 
 @NgModule({

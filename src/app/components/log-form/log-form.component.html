@@ -12,56 +12,56 @@
       <input type="password" class="input" id="password"  placeholder="Password" formControlName="password">
     </div>
   </div>
-  <div *ngIf="typeLog === 'register'" class="field">
+  <div *ngIf="typeLog === 'register' || typeLog === 'modifica'" class="field">
     <label for="email" class="label">*Email</label>
     <div>
       <input type="text" class="input" id="email"  placeholder="Email" formControlName="email">
     </div>
   </div>
-  <div *ngIf="typeLog === 'register'" class="field">
+  <div *ngIf="typeLog === 'register' || typeLog === 'modifica'" class="field">
     <label for="telefono" class="label">*Telefono</label>
     <div>
       <input type="text" class="input" id="telefono"  placeholder="Telefono" formControlName="telefono">
     </div>
   </div>
 
-  <div *ngIf="typeLog === 'register'" class="field">
+  <div *ngIf="typeLog === 'register' || typeLog === 'modifica'" class="field">
     <label for="nome" class="label">*Nome</label>
     <div>
       <input type="text" class="input" id="nome"  placeholder="Nome" formControlName="nome">
     </div>
   </div>
-  <div *ngIf="typeLog === 'register'" class="field">
+  <div *ngIf="typeLog === 'register' || typeLog === 'modifica'" class="field">
     <label for="cognome" class="label">*Cognome</label>
     <div>
       <input type="text" class="input" id="cognome"  placeholder="Cognome" formControlName="cognome">
     </div>
   </div>
-  <div *ngIf="typeLog === 'register'" class="field">
+  <div *ngIf="typeLog === 'register' || typeLog === 'modifica'" class="field">
     <label for="via" class="label">*Via</label>
     <div>
       <input type="text" class="input" id="via"  placeholder="Via" formControlName="via">
     </div>
   </div>
-  <div *ngIf="typeLog === 'register'" class="field">
+  <div *ngIf="typeLog === 'register' || typeLog === 'modifica'" class="field">
     <label for="nCivico" class="label">*Numero Civico</label>
     <div>
       <input type="text" class="input" id="nCivico"  placeholder="Numero Civico" formControlName="nCivico">
     </div>
   </div>
-  <div *ngIf="typeLog === 'register'" class="field">
+  <div *ngIf="typeLog === 'register' || typeLog === 'modifica'" class="field">
     <label for="cap" class="label">*Codice Postale</label>
     <div>
       <input type="text" class="input" id="cap"  placeholder="Codice Postale" formControlName="cap">
     </div>
   </div>
-  <div *ngIf="typeLog === 'register'" class="field">
+  <div *ngIf="typeLog === 'register' || typeLog === 'modifica'" class="field">
     <label for="citta" class="label">*Città</label>
     <div>
       <input type="text" class="input" id="citta"  placeholder="Città" formControlName="citta">
     </div>
   </div>
-  <div *ngIf="typeLog === 'register' && allCountries.length > 0" class="field">
+  <div *ngIf="(typeLog === 'register' || typeLog === 'modifica') && allCountries.length > 0" class="field">
     <label for="nazione" class="label">*Nazione</label>
     <div>
       <select name="nazione" id="nazione" formControlName="nazione">
@@ -73,5 +73,6 @@
 
   <p *ngIf="myError.status">{{myError.message}}</p>
   <button [disabled]="!logForm.valid" class="btn" *ngIf="typeLog === 'register'" type="submit">Registrati</button>
+  <button [disabled]="!logForm.valid" class="btn" *ngIf="typeLog === 'modifica'" type="submit">Modifica</button>
   <button class="btn" *ngIf="typeLog === 'login'" type="submit">Login</button>
 </form>

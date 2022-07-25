@@ -1,0 +1,22 @@
+<section class="section">
+
+  <ng-container *ngIf="!control">
+    <h2>Verifica la password</h2>
+    <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
+      <div class="field">
+        <label for="password" class="label">*Password</label>
+        <div>
+          <input type="password" class="input" id="password"  placeholder="Password" formControlName="password">
+        </div>
+      </div>
+      <p *ngIf="myError.status">{{myError.message}}</p>
+      <button [disabled]="!verifyForm.valid" class="btn" type="submit">VERIFICA</button>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="control && account">
+    <app-log-form [typeLog]="typeLog" [account]="account"></app-log-form>
+  </ng-container>
+
+</section>
+

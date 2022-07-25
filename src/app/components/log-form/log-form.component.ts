@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import MyError from 'src/app/classes/MyError';
 import ILogUser from 'src/app/interfaces/ILogUser';
+import IUser from 'src/app/interfaces/IUser';
 import { AuthService } from 'src/app/services/auth.service';
 import AuthValidator from 'src/app/validators/auth-validator';
 import Swal from 'sweetalert2';
@@ -17,6 +18,7 @@ import Swal from 'sweetalert2';
 export class LogFormComponent implements OnInit {
 
   @Input() typeLog?: string;
+  @Input() account?: IUser;
   logForm: FormGroup;
   myError: MyError = new MyError();
   allCountries: string[] = [];
@@ -61,7 +63,7 @@ export class LogFormComponent implements OnInit {
             this.myError.setError(res.status, res.message);
           } else {
             this.authService.login(logUser.username);
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/dashboard/account');
           }
         })
       }
@@ -82,6 +84,22 @@ export class LogFormComponent implements OnInit {
       })
     }
 
+    if (this.typeLog === 'modifica') {
+      this.authService.modificaUser(this.logForm.value, this.account?._id!).subscribe(res => {
+        if (res.status) {
+          this.myError.setError(true, res.message)
+        }
+        if (!res.status) {
+          Swal.fire({
+            title: res.message,
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          })
+          this.router.navigateByUrl('/dashboard/account')
+        }
+      })
+    }
+
   }
 
   getAllCountries(): Observable<any> {
@@ -95,6 +113,19 @@ export class LogFormComponent implements OnInit {
         this.allCountries.push(countrie.translations.ita.common)
       });
     })
+
+    if (this.account) {
+      this.logForm.controls['username'].setValue(this.account.username);
+      this.logForm.controls['email'].setValue(this.account.email);
+      this.logForm.controls['telefono'].setValue(this.account.telefono);
+      this.logForm.controls['nome'].setValue(this.account.nome);
+      this.logForm.controls['cognome'].setValue(this.account.cognome);
+      this.logForm.controls['via'].setValue(this.account.via);
+      this.logForm.controls['nCivico'].setValue(this.account.nCivico);
+      this.logForm.controls['cap'].setValue(this.account.cap);
+      this.logForm.controls['citta'].setValue(this.account.citta);
+      this.logForm.controls['nazione'].setValue(this.account.nazione);
+    }
 
   }
 

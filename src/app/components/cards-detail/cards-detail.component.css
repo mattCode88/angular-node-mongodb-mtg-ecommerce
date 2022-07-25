@@ -1,0 +1,12 @@
+img{
+  width: 100%;
+}
+.single-card{
+  margin: 25px 20px;
+}
+.description>*{
+  margin-top: 5px;
+}
+.add{
+  margin-top: 10px;
+}

@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HeaderComponent implements OnInit {
 
   username: string | null = '';
+  selezioneEsterna: boolean = false;
 
   constructor(
     public readonly authService: AuthService,
@@ -24,6 +25,14 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/auth/login']);
       }
     });
+  }
+
+  changeSelezione(): void {
+    this.selezioneEsterna = true;
+  }
+
+  cambiaSelezioneEsterna(bool: boolean): void {
+    this.selezioneEsterna = false;
   }
 
   ngOnInit(): void {

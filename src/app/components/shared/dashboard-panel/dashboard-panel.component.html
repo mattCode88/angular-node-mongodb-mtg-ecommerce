@@ -1,0 +1,9 @@
+<nav class="dashboard-nav">
+  <ul class="flex item-center justify-center">
+    <li [ngClass]="selezionato === 'account' ? 'blue-dark' : 'blue-nav'"><a (click)="changeColor('account')" routerLink="/dashboard/account">ACCOUNT</a></li>
+    <li [ngClass]="selezionato === 'vendite' ? 'blue-dark' : 'blue-nav'"><a (click)="changeColor('vendite')" routerLink="/dashboard/vendi-carte">VENDITE</a></li>
+    <li [ngClass]="selezionato === 'acquisti' ? 'blue-dark' : 'blue-nav'"><a (click)="changeColor('acquisti')" href="">ACQUISTI</a></li>
+    <li [ngClass]="selezionato === 'messaggi' ? 'blue-dark' : 'blue-nav'"><a (click)="changeColor('messaggi')" href="">MESSAGGI</a></li>
+    <li [ngClass]="selezionato === 'carrello' ? 'blue-dark' : 'blue-nav'"><a (click)="changeColor('carrello')" href="">CARRELLO</a></li>
+  </ul>
+</nav>

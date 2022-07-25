@@ -1,0 +1,19 @@
+<ng-container *ngIf="card">
+  <div class="row single-card">
+    <div class="col-1 col-lg-2 col-xs-3">
+      <img src="{{ card.image }}" alt="">
+    </div>
+    <div class="offset-1 col-9 col-lg-8 col-xs-7 description">
+      <h3>{{ card.name }}</h3>
+      <div>{{ card.set }}</div>
+      <div>{{ card.rarity }}</div>
+      <div>
+        <span *ngFor="let color of card.colors"><i class="fa-solid fa-circle {{color}}"></i></span>
+      </div>
+    </div>
+    <div class="col-1 add">
+      <i (click)="openModal()" title="Aggiungi alla collezione" class="fa-solid fa-plus pointer"></i>
+    </div>
+  </div>
+  <app-modal (closeModal)="closeModal($event)" [visibility]="visibility" [card]="card"></app-modal>
+</ng-container>

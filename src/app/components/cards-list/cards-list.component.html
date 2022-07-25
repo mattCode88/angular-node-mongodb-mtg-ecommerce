@@ -1,0 +1,4 @@
+<ng-container *ngIf="searchedCards.length > 0">
+  <app-cards-detail *ngFor="let card of searchedCards" [card]="card"></app-cards-detail>
+</ng-container>
+

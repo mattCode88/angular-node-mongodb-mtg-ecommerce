@@ -1,0 +1,13 @@
+<form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <label for="prezzo" class="label">Scegli il prezzo:</label>
+    <div class="col-12">
+      <input type="text" class="basic-input basic-input-1 input-section" id="prezzo"  placeholder="10.00" formControlName="prezzo">
+    </div>
+    <label for="quantita" class="label">Scegli la quantità:</label>
+    <div class="col-12">
+      <input type="text" class="basic-input basic-input-1 input-section" id="quantita"  placeholder="1" formControlName="quantita">
+    </div>
+    <button [disabled]="!cardForm.valid" class="btn btn-green btn-section pointer" type="submit">Aggiungi</button>
+  </div>
+</form>
