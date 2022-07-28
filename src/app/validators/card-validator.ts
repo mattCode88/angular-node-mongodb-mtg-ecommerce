@@ -37,4 +37,18 @@ export default class CardValidator {
 
   }
 
+  static validaQuantitaInVendita(): ValidatorFn | null {
+
+    return (control: AbstractControl): ValidationErrors | null => {
+
+      if (isNaN(control.value) || control.value < 0 || control.value > 500 || control.value.includes('.')) {
+        return { invalidQuantitaInVendita: true };
+      }
+
+      return null;
+
+    }
+
+  }
+
 }

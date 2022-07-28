@@ -18,9 +18,25 @@
         </div>
     </div>
     </ng-container>
-    <ng-container *ngIf="typeModal === 'edit'">
-      edit
+
+    <ng-container *ngIf="typeModal === 'edit' && myCard">
+      <div class="row">
+        <img class="col-3 col-md-4 col-sm-5 col-xs-12" src="{{ myCard.image }}" alt="">
+        <div class="offset-1 col-8 col-md-7 col-sm-6 col-xs-12">
+          <h3>{{ myCard.name }}</h3>
+          <div class="mrg-top">{{ myCard.set }}</div>
+          <div class="mrg-top">{{ myCard.rarity }}</div>
+        <div class="mrg-top">
+          <span *ngFor="let color of myCard.colors"><i class="fa-solid fa-circle {{color}}"></i></span>
+        </div>
+        <div class="mrg-top">
+          <app-card-form [typeCardForm]="typeCardForm" [myCard]="myCard" (sendPrice)="takePrice($event)" (cartaModificata)="cartaModificata($event)"></app-card-form>
+        </div>
+          <p class="error" *ngIf="myError.status">*{{myError.message}}</p>
+        </div>
+    </div>
     </ng-container>
+
     <ng-container *ngIf="typeModal === 'delete' && myCard">
       <h3>Premendo conferma eliminerai tutte le carte: {{ myCard.name }}<br> presenti nella tua collezione.</h3>
       <div><button (click)="deleteCards(myCard)" class="btn btn-green pointer btn2-section">Conferma</button></div>

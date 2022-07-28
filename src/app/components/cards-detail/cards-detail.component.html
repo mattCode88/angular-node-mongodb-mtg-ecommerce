@@ -35,7 +35,7 @@
     <app-modal (closeModal)="closeModal($event)" [visibility]="visibility" [card]="card" [typeModal]="typeModal"></app-modal>
   </ng-container>
   <ng-container *ngIf="myCard">
-    <app-modal (closeModal)="closeModal($event)" (cardDeleted)="cardDeleted($event)" [visibility]="visibility" [myCard]="myCard" [typeModal]="typeModal"></app-modal>
+    <app-modal (closeModal)="closeModal($event)" (cardModify)="cardModify($event)" (cardDeleted)="cardDeleted($event)" [visibility]="visibility" [myCard]="myCard" [typeModal]="typeModal"></app-modal>
   </ng-container>
 
 </ng-container>

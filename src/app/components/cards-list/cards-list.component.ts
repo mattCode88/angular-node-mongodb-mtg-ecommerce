@@ -17,6 +17,7 @@ export class CardsListComponent implements OnInit, OnChanges {
   @Input() myCardsArray: SellCard[] = [];
   @Input() searchedCards: Card[] = [];
   @Output() cardDeleted: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() cardModify: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     private readonly cardService: CardService,
@@ -25,6 +26,10 @@ export class CardsListComponent implements OnInit, OnChanges {
 
   cardDeletedConfirm(confirm: boolean): void {
     this.cardDeleted.emit(confirm);
+  }
+
+  cartaModificata(event: boolean): void {
+    this.cardModify.emit(true);
   }
 
   ngOnInit(): void {

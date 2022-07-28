@@ -1,13 +1,37 @@
-<form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
-  <div class="row">
-    <label for="prezzo" class="label">Scegli il prezzo:</label>
-    <div class="col-12">
-      <input type="text" class="basic-input basic-input-1 input-section" id="prezzo"  placeholder="10.00" formControlName="prezzo">
+<ng-container *ngIf="typeCardForm === ''">
+  <form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <label for="prezzo" class="label">Scegli il prezzo:</label>
+      <div class="col-12">
+        <input type="text" class="basic-input basic-input-1 input-section" id="prezzo"  placeholder="10.00" formControlName="prezzo">
+      </div>
+      <label for="quantita" class="label">Scegli la quantità:</label>
+      <div class="col-12">
+        <input type="text" class="basic-input basic-input-1 input-section" id="quantita"  placeholder="1" formControlName="quantita">
+      </div>
+      <button [disabled]="!cardForm.valid" class="btn btn-green btn-section pointer" type="submit">Aggiungi</button>
     </div>
-    <label for="quantita" class="label">Scegli la quantità:</label>
-    <div class="col-12">
-      <input type="text" class="basic-input basic-input-1 input-section" id="quantita"  placeholder="1" formControlName="quantita">
+  </form>
+</ng-container>
+
+<ng-container *ngIf="typeCardForm === 'modifica'">
+  <form [formGroup]="cardModifyForm" (ngSubmit)="onModifySubmit()">
+    <div class="row">
+      <label for="prezzo" class="label">Scegli il prezzo:</label>
+      <div class="col-12">
+        <input type="text" class="basic-input basic-input-1 input-section" id="prezzo" formControlName="prezzo">
+      </div>
+      <label for="quantita" class="label">Scegli la quantità:</label>
+      <div class="col-12">
+        <input type="text" class="basic-input basic-input-1 input-section" id="quantita" formControlName="quantita">
+      </div>
+      <label for="toSell" class="label">Quantità in vendita:</label>
+      <div class="col-12">
+        <input type="text" class="basic-input basic-input-1 input-section" id="toSell" formControlName="toSell">
+      </div>
+      <p class="col-12 error" *ngIf="myError.status">{{myError.message}}</p>
+      <button [disabled]="!cardModifyForm.valid" class="btn btn-green btn-section pointer" type="submit">Aggiorna</button>
     </div>
-    <button [disabled]="!cardForm.valid" class="btn btn-green btn-section pointer" type="submit">Aggiungi</button>
-  </div>
-</form>
+  </form>
+</ng-container>
+

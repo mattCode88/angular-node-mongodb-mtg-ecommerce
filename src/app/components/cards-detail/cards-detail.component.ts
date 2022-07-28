@@ -12,6 +12,7 @@ export class CardsDetailComponent implements OnInit {
   @Input() card?: Card;
   @Input() myCard?: SellCard;
   @Output() cardDeletedConfirm: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() cartaModificata: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   visibility = false;
   typeModal = '';
@@ -31,6 +32,10 @@ export class CardsDetailComponent implements OnInit {
 
   cardDeleted(event: boolean): void {
     this.cardDeletedConfirm.emit(true);
+  }
+
+  cardModify(event: boolean): void {
+    this.cartaModificata.emit(true);
   }
 
   ngOnInit(): void {

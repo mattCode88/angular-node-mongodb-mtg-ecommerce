@@ -22,6 +22,10 @@ export class CardService {
     return this.http.post<SellCard>(`${this.ENDPOINT}/card/add`, card);
   }
 
+  updateCard(card: SellCard, id: string): Observable<boolean> {
+    return this.http.put<boolean>(`${this.ENDPOINT}/card/modifica`, [card, id]);
+  }
+
   deleteCard(id: string): Observable<boolean> {
     return this.http.delete<boolean>(`${this.ENDPOINT}/card/delete/${id}`);
   }

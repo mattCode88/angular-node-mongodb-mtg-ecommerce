@@ -8,6 +8,8 @@ router.get('/card/owner-card/:owner', cardController.getOwnerCard);
 
 router.delete('/card/delete/:id', cardController.deleteCard);
 
+router.put('/card/modifica', cardController.updateCard);
+
 
 
 

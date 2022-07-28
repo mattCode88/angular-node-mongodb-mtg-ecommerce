@@ -3,6 +3,6 @@
 </ng-container>
 
 <ng-container *ngIf="myCardsArray.length > 0">
-  <app-cards-detail (cardDeletedConfirm)="cardDeletedConfirm($event)" *ngFor="let myCard of myCardsArray" [myCard]="myCard"></app-cards-detail>
+  <app-cards-detail (cartaModificata)="cartaModificata($event)" (cardDeletedConfirm)="cardDeletedConfirm($event)" *ngFor="let myCard of myCardsArray" [myCard]="myCard"></app-cards-detail>
 </ng-container>
 

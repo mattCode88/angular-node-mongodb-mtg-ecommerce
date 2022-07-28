@@ -20,7 +20,9 @@ export class ModalComponent implements OnInit, OnChanges {
   @Input() typeModal?: string;
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() cardDeleted: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() cardModify: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  typeCardForm = 'modifica';
   owner?: string;
   myError: MyError = new MyError();
 
@@ -84,10 +86,16 @@ export class ModalComponent implements OnInit, OnChanges {
     })
   }
 
+  cartaModificata(event: boolean): void {
+    this.cardModify.emit(true);
+    this.close();
+  }
+
   ngOnChanges(): void {
   }
 
   ngOnInit(): void {
+    // if (this.myCard) console.log(this.myCard)
   }
 
 }

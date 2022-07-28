@@ -75,3 +75,18 @@ exports.deleteCard = async (req, res) => {
     });
 
 }
+
+exports.updateCard = async (req, res) => {
+
+  CardCollection.findByIdAndUpdate(req.body[1], req.body[0], { useFindAndModify: false })
+    .then(data => {
+        if (!data) {
+            res.send(false)
+        } else {
+            res.send(true);
+        }
+    }).catch(err => {
+        res.send(false)
+    });
+
+}

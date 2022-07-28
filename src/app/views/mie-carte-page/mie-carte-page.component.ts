@@ -26,6 +26,13 @@ export class MieCartePageComponent implements OnInit {
     }
   }
 
+  cardModify(event: boolean): void {
+    if (event) {
+      this.myCardsArray = [];
+      this.takeMyCards();
+    }
+  }
+
   takeMyCards(): void {
     this.cardService.getOwnerCard(this.owner!).subscribe(res => {
       this.myCardsArray = res;

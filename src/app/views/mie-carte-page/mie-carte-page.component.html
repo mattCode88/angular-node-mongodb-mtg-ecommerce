@@ -3,7 +3,7 @@
     <app-cards-search [typeSearch]="typeSearch"></app-cards-search>
   </div>
   <div *ngIf="myCardsArray.length > 0">
-    <app-cards-list [myCardsArray]="myCardsArray" (cardDeleted)="cardDeleted($event)"></app-cards-list>
+    <app-cards-list [myCardsArray]="myCardsArray" (cardModify)="cardModify($event)" (cardDeleted)="cardDeleted($event)"></app-cards-list>
   </div>
 </section>
 
