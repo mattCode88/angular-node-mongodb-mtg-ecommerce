@@ -10,10 +10,30 @@ ul>li{
   display: flex;
   align-items: center;
 }
-li>a{
+ul>li:nth-of-type(2){
+  position: relative;
+}
+ul>li:nth-of-type(2)>div{
+  position: absolute;
+  top: 40px;
+  left: 0;
+  z-index: 100;
+  background-color: var(--blue-nav);
+  color: #fff;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  /* display: none; */
+}
+ul>li:nth-of-type(2)>div>div{
+  padding: 10px 15px;
+}
+li a{
   color: #fff;
 }
 ul>li:hover{
+  background-color: var(--blue-dark);
+}
+ul>li:nth-of-type(2)>div>div:hover{
   background-color: var(--blue-dark);
 }
 .blue-dark{

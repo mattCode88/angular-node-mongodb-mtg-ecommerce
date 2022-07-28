@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Card from 'src/app/classes/Card';
 import { DashboardService } from 'src/app/services/dashboard.service';
@@ -12,6 +12,7 @@ export class CardsSearchComponent implements OnInit {
 
   searchForm: FormGroup;
 
+  @Input() typeSearch?: string;
   @Output() sendCardsList: EventEmitter<Card[]> = new EventEmitter<Card[]>();
 
   constructor(
@@ -37,6 +38,7 @@ export class CardsSearchComponent implements OnInit {
     array.forEach(card => {
       if (card.imageUrl) {
         let newCard = new Card(
+          card.number,
           card.name,
           card.colors,
           card.imageUrl,
@@ -56,6 +58,7 @@ export class CardsSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.typeSearch)
   }
 
 }

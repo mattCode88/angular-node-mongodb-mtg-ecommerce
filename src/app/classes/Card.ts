@@ -1,5 +1,6 @@
 export default class Card {
 
+  identity: string;
   name: string;
   colors: string[];
   image: string;
@@ -13,6 +14,7 @@ export default class Card {
   toughness?: string;
 
   constructor(
+    identity: string,
     name: string,
     colors: string[],
     image: string,
@@ -25,6 +27,7 @@ export default class Card {
     power?: string,
     toughness?: string
   ) {
+    this.identity = identity;
     this.name = name;
     this.colors = colors;
     this.image = image;

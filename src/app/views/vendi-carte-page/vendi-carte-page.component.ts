@@ -9,6 +9,7 @@ import Card from 'src/app/classes/Card';
 export class VendiCartePageComponent implements OnInit {
 
   searchedCards?: Card[] = [];
+  typeSearch = 'partial';
 
   constructor() { }
 

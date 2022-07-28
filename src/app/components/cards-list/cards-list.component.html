@@ -2,3 +2,7 @@
   <app-cards-detail *ngFor="let card of searchedCards" [card]="card"></app-cards-detail>
 </ng-container>
 
+<ng-container *ngIf="myCardsArray.length > 0">
+  <app-cards-detail (cardDeletedConfirm)="cardDeletedConfirm($event)" *ngFor="let myCard of myCardsArray" [myCard]="myCard"></app-cards-detail>
+</ng-container>
+

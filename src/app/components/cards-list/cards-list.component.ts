@@ -1,5 +1,9 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import Card from 'src/app/classes/Card';
+import MyError from 'src/app/classes/MyError';
+import SellCard from 'src/app/classes/SellCard';
+import { AuthService } from 'src/app/services/auth.service';
+import { CardService } from 'src/app/services/card.service';
 
 @Component({
   selector: 'app-cards-list',
@@ -8,15 +12,25 @@ import Card from 'src/app/classes/Card';
 })
 export class CardsListComponent implements OnInit, OnChanges {
 
-  @Input() searchedCards: Card[] = [];
+  myError: MyError = new MyError();
 
-  constructor() { }
+  @Input() myCardsArray: SellCard[] = [];
+  @Input() searchedCards: Card[] = [];
+  @Output() cardDeleted: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  constructor(
+    private readonly cardService: CardService,
+    private readonly authService: AuthService,
+  ) { }
+
+  cardDeletedConfirm(confirm: boolean): void {
+    this.cardDeleted.emit(confirm);
+  }
 
   ngOnInit(): void {
   }
 
   ngOnChanges(): void {
-    // if (this.searchedCards.length > 0) console.log(this.searchedCards)
   }
 
 }

@@ -1,4 +1,5 @@
-<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+<ng-container *ngIf="typeSearch === 'partial'">
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
   <div class="row">
     <div class="col-10">
       <input type="text" class=" basic-input input-section" id="cardName"  placeholder="Vendi Carta" formControlName="cardName">
@@ -6,3 +7,9 @@
     <button [disabled]="!searchForm.valid" class="btn-section col-2 pointer" type="submit">Cerca</button>
   </div>
 </form>
+</ng-container>
+
+<ng-container *ngIf="typeSearch === 'complete'">
+  ciao
+</ng-container>
+

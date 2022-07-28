@@ -28,6 +28,10 @@
   right: 15px;
 }
 
+.btn2-section{
+  margin-top: 15px;
+}
+
 @media screen and (max-width: 575px){
   .modal-content>div>div:first-of-type{
     margin-top: 20px;

@@ -1,5 +1,5 @@
 <section class="section">
-  <app-cards-search (sendCardsList)="takeCardsList($event)"></app-cards-search>
+  <app-cards-search [typeSearch]="typeSearch" (sendCardsList)="takeCardsList($event)"></app-cards-search>
 <ng-container *ngIf="searchedCards">
   <app-cards-list [searchedCards]="searchedCards"></app-cards-list>
 </ng-container>

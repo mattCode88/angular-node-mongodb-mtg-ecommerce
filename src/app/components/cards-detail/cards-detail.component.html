@@ -1,19 +1,44 @@
-<ng-container *ngIf="card">
+<ng-container *ngIf="card || myCard">
   <div class="row single-card">
     <div class="col-1 col-lg-2 col-xs-3">
-      <img src="{{ card.image }}" alt="">
+      <img *ngIf="card" src="{{ card.image }}" alt="">
+      <img *ngIf="myCard" src="{{ myCard.image }}" alt="">
     </div>
-    <div class="offset-1 col-9 col-lg-8 col-xs-7 description">
-      <h3>{{ card.name }}</h3>
-      <div>{{ card.set }}</div>
-      <div>{{ card.rarity }}</div>
-      <div>
+    <div class="offset-1"></div>
+    <div class="col-9 col-lg-8 col-xs-7 description">
+      <h3 *ngIf="card">{{ card.name }}</h3>
+      <h3 *ngIf="myCard">{{ myCard.name }}</h3>
+      <div *ngIf="card">{{ card.set }}</div>
+      <div *ngIf="myCard">{{ myCard.set }}</div>
+      <div *ngIf="card">{{ card.rarity }}</div>
+      <div *ngIf="myCard">{{ myCard.rarity }}</div>
+      <div *ngIf="card">
         <span *ngFor="let color of card.colors"><i class="fa-solid fa-circle {{color}}"></i></span>
       </div>
+      <div *ngIf="myCard">
+        <span *ngFor="let color of myCard.colors"><i class="fa-solid fa-circle {{color}}"></i></span>
+      </div>
     </div>
-    <div class="col-1 add">
-      <i (click)="openModal()" title="Aggiungi alla collezione" class="fa-solid fa-plus pointer"></i>
-    </div>
+    <ng-container *ngIf="card">
+      <div class="col-1 add">
+        <i (click)="openModal()" title="Aggiungi alla collezione" class="fa-solid fa-plus pointer"></i>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="myCard">
+      <div class="col-1 add">
+        <i (click)="openModal('edit')" title="Gestisci" class="fa-solid fa-pen-to-square pointer"></i>
+        <i (click)="openModal('delete')" title="Elimina" class="fa-solid fa-trash pointer"></i>
+      </div>
+    </ng-container>
   </div>
-  <app-modal (closeModal)="closeModal($event)" [visibility]="visibility" [card]="card"></app-modal>
+  <ng-container *ngIf="card">
+    <app-modal (closeModal)="closeModal($event)" [visibility]="visibility" [card]="card" [typeModal]="typeModal"></app-modal>
+  </ng-container>
+  <ng-container *ngIf="myCard">
+    <app-modal (closeModal)="closeModal($event)" (cardDeleted)="cardDeleted($event)" [visibility]="visibility" [myCard]="myCard" [typeModal]="typeModal"></app-modal>
+  </ng-container>
+
 </ng-container>
+
+
+

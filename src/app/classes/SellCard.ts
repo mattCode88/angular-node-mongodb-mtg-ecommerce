@@ -1,5 +1,6 @@
 export default class Card {
 
+  identity: string;
   owner: string;
   name: string;
   colors: string[];
@@ -16,8 +17,10 @@ export default class Card {
   fidelity?: string;
   power?: string;
   toughness?: string;
+  _id?: string;
 
   constructor(
+    identity: string,
     owner: string,
     name: string,
     colors: string[],
@@ -33,8 +36,10 @@ export default class Card {
     sold: boolean,
     fidelity?: string,
     power?: string,
-    toughness?: string
+    toughness?: string,
+    _id?: string
   ) {
+    this.identity = identity;
     this.owner = owner;
     this.name = name;
     this.colors = colors;
@@ -51,6 +56,7 @@ export default class Card {
     this.fidelity = fidelity;
     this.power = power;
     this.toughness = toughness;
+    this._id = _id
   }
 
 }

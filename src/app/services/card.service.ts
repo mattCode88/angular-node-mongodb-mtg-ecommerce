@@ -14,8 +14,16 @@ export class CardService {
     private readonly http: HttpClient,
   ) { }
 
-  addCard(card: SellCard): Observable<SellCard> {
+  getOwnerCard(owner: string): Observable<any> {
+    return this.http.get<string>(`${this.ENDPOINT}/card/owner-card/${owner}`);
+  }
+
+  addCard(card: SellCard): Observable<any> {
     return this.http.post<SellCard>(`${this.ENDPOINT}/card/add`, card);
+  }
+
+  deleteCard(id: string): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.ENDPOINT}/card/delete/${id}`);
   }
 
 }
