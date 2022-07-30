@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import SellCard from 'src/app/classes/SellCard';
+import ISearchCard from 'src/app/interfaces/ISearchCard';
 import { AuthService } from 'src/app/services/auth.service';
 import { CardService } from 'src/app/services/card.service';
 
@@ -37,6 +38,25 @@ export class MieCartePageComponent implements OnInit {
     this.cardService.getOwnerCard(this.owner!).subscribe(res => {
       this.myCardsArray = res;
     })
+  }
+
+  searchEvent(event: ISearchCard): void {
+    if (event.cardName !== '') {
+      this.cardService.getOwnerCardForCardName(this.owner!, event.cardName).subscribe(res => {
+        this.myCardsArray = res;
+      })
+    }
+    if (event.cardName === '') {
+      this.cardService.getOwnerCardForParameters(this.owner!, event).subscribe(res => {
+        this.myCardsArray = res;
+      })
+    }
+  }
+
+  resetSearchEvent(event: boolean): void {
+    if (event) {
+      this.takeMyCards();
+    }
   }
 
   ngOnInit(): void {

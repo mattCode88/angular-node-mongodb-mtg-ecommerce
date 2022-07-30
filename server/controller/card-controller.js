@@ -90,3 +90,61 @@ exports.updateCard = async (req, res) => {
     });
 
 }
+
+exports.getOwnerCardForCardName = async (req, res) => {
+  const searchCard = [];
+  const ownerCard = await CardCollection.find({ owner: req.body[0] });
+
+  ownerCard.forEach(card => {
+    if (card.name.toLowerCase().includes(req.body[1].toLowerCase())) searchCard.push(card);
+  })
+
+  res.send(searchCard)
+}
+
+exports.getOwnerCardForParameters = async (req, res) => {
+
+  let campiRichiesti = 0;
+  let filterArray = [];
+  for (let campo in req.body[1]) {
+    if (req.body[1][campo] !== '' && req.body[1][campo] !== 'all') campiRichiesti++
+  }
+  const ownerCard = await CardCollection.find({ owner: req.body[0] });
+
+  ownerCard.forEach(card => {
+    let count = 0;
+    if (req.body[1].color !== '' && req.body[1].color !== 'all') {
+      card.colors.forEach(col => {
+        if (req.body[1].color === col) {
+          count++;
+        }
+      })
+    }
+    if (req.body[1].type !== '' && req.body[1].type !== 'all') {
+      card.types.forEach(ty => {
+        if (req.body[1].type === ty) {
+          count++;
+        }
+      })
+    }
+    if (
+      (req.body[1].set !== '' && req.body[1].set !== 'all') &&
+      card.set === req.body[1].set
+    ) count++;
+    if (
+      (req.body[1].rarity !== '' && req.body[1].rarity !== 'all') &&
+      card.rarity === req.body[1].rarity
+    ) count++;
+    if (
+      (req.body[1].mana !== '' && req.body[1].mana !== 'all') &&
+      card.mana === Number(req.body[1].mana)
+    ) count++;
+    if (campiRichiesti === count) filterArray.push(card);
+  })
+
+  res.send(filterArray)
+
+}
+
+
+

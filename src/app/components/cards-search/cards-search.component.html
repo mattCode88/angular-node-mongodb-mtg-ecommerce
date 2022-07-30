@@ -2,7 +2,7 @@
   <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
   <div class="row">
     <div class="col-10">
-      <input type="text" class=" basic-input input-section" id="cardName"  placeholder="Vendi Carta" formControlName="cardName">
+      <input type="text" class=" basic-input input-section basic-input-1" id="cardName"  placeholder="Vendi Carta" formControlName="cardName">
     </div>
     <button [disabled]="!searchForm.valid" class="btn-section col-2 pointer" type="submit">Cerca</button>
   </div>
@@ -10,6 +10,79 @@
 </ng-container>
 
 <ng-container *ngIf="typeSearch === 'complete'">
-  ciao
+  <form [formGroup]="searchCompleteForm" (ngSubmit)="searchSubmit()" class="advanced-search">
+    <div class="row item-center">
+
+      <label for="cardName" class="col-1 col-md-2 col-xs-3">Nome Carta:</label>
+      <div class="col-11 col-md-10 col-xs-9">
+        <input type="text" class=" basic-input basic-input-1 input-section" id="cardName"  placeholder="Vendi Carta" formControlName="cardName">
+      </div>
+
+      <label for="set" class="col-1 col-md-2 col-xs-3">Edizione:</label>
+      <div class="col-11 col-md-10 col-xs-9">
+        <select class="basic-input-1 basic-input" *ngIf="arraySets" name="set" id="set" formControlName="set">
+        <option value="all">ALL</option>
+        <option *ngFor="let set of arraySets">{{set}}</option>
+      </select>
+      </div>
+
+      <label for="rarity" class="col-1 col-md-2 col-xs-3">Rarità:</label>
+      <div class="col-5 col-md-4 col-sm-10 col-xs-9">
+        <select class="basic-input-1 basic-input" *ngIf="arrayRaritys" name="rarity" id="rarity" formControlName="rarity">
+          <option value="all">ALL</option>
+          <option *ngFor="let rarity of arrayRaritys">{{rarity}}</option>
+        </select>
+      </div>
+
+      <label for="type" class="col-1 col-md-2 label-padding col-xs-3">Tipo:</label>
+      <div class="col-5 col-md-4 col-sm-10 col-xs-9">
+        <select class="basic-input-1 basic-input" *ngIf="arrayTypes" name="type" id="type" formControlName="type">
+          <option value="all">ALL</option>
+          <option *ngFor="let type of arrayTypes">{{type}}</option>
+        </select>
+      </div>
+
+      <label for="color" class="col-1 col-md-2 col-xs-3">Colore:</label>
+      <div class="col-5 col-md-4 col-sm-10 col-xs-9">
+        <select class="basic-input-1 basic-input" *ngIf="arrayColors" name="color" id="color" formControlName="color">
+          <option value="all">ALL</option>
+          <option *ngFor="let color of arrayColors">{{color}}</option>
+        </select>
+      </div>
+
+      <label for="mana" class="col-1 col-md-2 label-padding col-xs-3">Mana:</label>
+      <div class="col-5 col-md-4 col-sm-10 col-xs-9">
+        <select class="basic-input-1 basic-input" *ngIf="arrayMana" name="mana" id="mana" formControlName="mana">
+          <option value="all">ALL</option>
+          <option *ngFor="let mana of arrayMana.sort()">{{mana}}</option>
+        </select>
+      </div>
+
+      <div class="col-12 flex container-btn">
+        <button class="btn btn-green pointer" type="submit">CERCA</button>
+        <button class="btn btn-red pointer" (click)="reset()">RESET</button>
+      </div>
+
+      <!-- <div class="offset-1 col-11 offset-md-2 col-md-10 offset-xs-3 col-xs-9">
+        <div class="row">
+          <div class="col-6 div-btn">
+            <button class="btn-form pointer btn-green">CERCA</button>
+          </div>
+          <div class="col-6 pad-l">
+            <button class="btn-form pointer btn-red">RESET</button>
+          </div>
+        </div>
+
+      </div> -->
+
+      <!-- <div class="offset-1 col-5 offset-md-2 col-md-4 offset-sm-2 col-sm-10 offset-xs-3 col-xs-9">
+        <button class="btn-form pointer btn-green">CERCA</button>
+      </div>
+      <div class="col-6 offset-sm-2 col-sm-10 offset-xs-3 col-xs-9">
+        <button class="btn-form pointer btn-red">RESET</button>
+      </div> -->
+
+    </div>
+  </form>
 </ng-container>
 

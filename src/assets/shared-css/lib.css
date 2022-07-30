@@ -26,7 +26,7 @@ ul {
 }
 
 .basic-input{
-  padding: 15px;
+  padding: 0 15px;
   appearance: none;
   border: none;
   background-color: var(--blue-input);
@@ -36,7 +36,8 @@ ul {
 }
 
 .basic-input-1{
-  padding: 8px;
+  /* padding: 8px; */
+  height: 40px;
 }
 
 input:focus-within {
@@ -54,19 +55,19 @@ input:focus-within {
 }
 
 .btn-green{
-  background-color: var(--green);
+  background-color: var(--green-hover);
 }
 
 .btn-red{
-  background-color: var(--red);
-}
-
-.btn-red:hover{
   background-color: var(--red-hover);
 }
 
+.btn-red:hover{
+  background-color: var(--red);
+}
+
 .btn-green:hover {
-  background-color: var(--green-hover);
+  background-color: var(--green);
 }
 
 .White{
