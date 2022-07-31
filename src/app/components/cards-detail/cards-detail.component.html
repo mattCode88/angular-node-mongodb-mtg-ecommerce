@@ -1,11 +1,11 @@
 <ng-container *ngIf="card || myCard">
   <div class="row single-card">
     <div class="col-1 col-lg-2 col-xs-3">
-      <img *ngIf="card" src="{{ card.image }}" alt="">
-      <img *ngIf="myCard" src="{{ myCard.image }}" alt="">
+      <img *ngIf="card" src="{{ card.image }}" (click)="openModal('image')" class="pointer" alt="">
+      <img *ngIf="myCard" src="{{ myCard.image }}" (click)="openModal('image')" class="pointer" alt="">
     </div>
     <div class="offset-1"></div>
-    <div class="col-9 col-lg-8 col-xs-7 description">
+    <div class="col-9 col-lg-8 col-xs-7 description pointer" (click)="openModal('info')">
       <h3 *ngIf="card">{{ card.name }}</h3>
       <h3 *ngIf="myCard">{{ myCard.name }}</h3>
       <div *ngIf="card">{{ card.set }}</div>
@@ -26,7 +26,7 @@
     </ng-container>
     <ng-container *ngIf="myCard">
       <div class="col-1 add">
-        <i (click)="openModal('edit')" title="Gestisci" class="fa-solid fa-pen-to-square pointer"></i>
+        <i (click)="openModal('edit')" title="Gestisci" class="fa-solid fa-pen-to-square pointer i-edit"></i>
         <i (click)="openModal('delete')" title="Elimina" class="fa-solid fa-trash pointer"></i>
       </div>
     </ng-container>

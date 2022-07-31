@@ -1,10 +1,11 @@
 <ng-container *ngIf="visibility && (card || myCard)">
   <div id="myModal" class="modal">
   <div class="modal-content">
+
     <ng-container *ngIf="typeModal === '' && card">
       <div class="row">
         <img class="col-3 col-md-4 col-sm-5 col-xs-12" src="{{ card.image }}" alt="">
-        <div class="offset-1 col-8 col-md-7 col-sm-6 col-xs-12">
+        <div class="offset-1 col-8 col-md-7 col-sm-6 col-xs-12 mrg-top">
           <h3>{{ card.name }}</h3>
           <div class="mrg-top">{{ card.set }}</div>
           <div class="mrg-top">{{ card.rarity }}</div>
@@ -22,7 +23,7 @@
     <ng-container *ngIf="typeModal === 'edit' && myCard">
       <div class="row">
         <img class="col-3 col-md-4 col-sm-5 col-xs-12" src="{{ myCard.image }}" alt="">
-        <div class="offset-1 col-8 col-md-7 col-sm-6 col-xs-12">
+        <div class="offset-1 col-8 col-md-7 col-sm-6 col-xs-12 mrg-top">
           <h3>{{ myCard.name }}</h3>
           <div class="mrg-top">{{ myCard.set }}</div>
           <div class="mrg-top">{{ myCard.rarity }}</div>
@@ -39,11 +40,59 @@
 
     <ng-container *ngIf="typeModal === 'delete' && myCard">
       <h3>Premendo conferma eliminerai tutte le carte: {{ myCard.name }}<br> presenti nella tua collezione.</h3>
-      <div><button (click)="deleteCards(myCard)" class="btn btn-green pointer btn2-section">Conferma</button></div>
+      <div><button (click)="deleteCards(myCard)" class="btn btn-green pointer btn2-section mrg-bottom">Conferma</button></div>
     </ng-container>
+
+    <ng-container *ngIf="(typeModal === 'image' && myCard) || (typeModal === 'image' && card)">
+      <div class="myCard-image-container align-center">
+        <img *ngIf="myCard" class="myCard-image" src="{{ myCard.image }}" alt="">
+        <img *ngIf="card" class="myCard-image" src="{{ card.image }}" alt="">
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="(typeModal === 'info' && myCard) || (typeModal === 'info' && card)">
+      <ng-container *ngIf="myCard">
+        <div class="row">
+          <h4 class="col-2 col-xs-3">Nome: </h4>
+          <div class="col-10 col-xs-9">{{ myCard.name }}</div>
+          <h4 class="col-2 col-xs-3">Edizione: </h4>
+          <div class="col-10 col-xs-9">{{ myCard.set }}</div>
+          <h4 class="col-2 col-xs-3">Rarità: </h4>
+          <div class="col-10 col-xs-9">{{ myCard.rarity }}</div>
+          <h4 class="col-2 col-xs-3">Mana: </h4>
+          <div class="col-10 col-xs-9">{{ myCard.mana }}</div>
+          <h4 class="col-2 col-xs-3">Colori: </h4>
+          <div class="col-10 col-xs-9">
+            <span *ngFor="let color of myCard.colors">{{ color }} </span>
+          </div>
+          <h4 class="col-2 col-xs-3">Testo: </h4>
+          <div class="col-10 col-xs-9 pd-bottom">{{ myCard.text }}</div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="card">
+        <div class="row">
+          <h4 class="col-2 col-xs-3">Nome: </h4>
+        <div class="col-10 col-xs-9">{{ card.name }}</div>
+        <h4 class="col-2 col-xs-3">Edizione: </h4>
+        <div class="col-10 col-xs-9">{{ card.set }}</div>
+        <h4 class="col-2 col-xs-3">Rarità: </h4>
+        <div class="col-10 col-xs-9">{{ card.rarity }}</div>
+        <h4 class="col-2 col-xs-3">Mana: </h4>
+        <div class="col-10 col-xs-9">{{ card.mana }}</div>
+        <h4 class="col-2 col-xs-3">Colori: </h4>
+        <div class="col-10 col-xs-9">
+          <span *ngFor="let color of card.colors">{{ color }} </span>
+        </div>
+        <h4 class="col-2 col-xs-3">Testo: </h4>
+        <div class="col-10 col-xs-9 pd-bottom">{{ card.text }}</div>
+        </div>
+      </ng-container>
+    </ng-container>
+
     <div>
       <button class="btn btn-red btn-section pointer" (click)="close()">CHIUDI</button>
     </div>
+
   </div>
 </div>
 </ng-container>

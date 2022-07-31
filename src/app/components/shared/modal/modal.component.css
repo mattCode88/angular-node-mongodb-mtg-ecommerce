@@ -16,6 +16,7 @@
   border: 1px solid #888;
   width: 80%;
   position: relative;
+  border-radius: 5px;
 }
 
 .mrg-top{
@@ -32,9 +33,31 @@
   margin-top: 15px;
 }
 
+.myCard-image-container{
+  width: 100%;
+}
+
+.myCard-image{
+  width: 30%;
+}
+
+.pd-bottom{
+  padding-bottom: 40px;
+}
+
+.mrg-bottom{
+  margin-bottom: 40px;
+}
+
 @media screen and (max-width: 575px){
-  .modal-content>div>div:first-of-type{
+  .mrg-top{
     margin-top: 20px;
   }
+}
+
+@media screen and (max-width: 991px){
+  .myCard-image {
+      width: 50%;
+    }
 }
 

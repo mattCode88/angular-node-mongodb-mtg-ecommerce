@@ -10,3 +10,12 @@ img{
 .add{
   margin-top: 10px;
 }
+i.fa-trash, i.fa-pen-to-square{
+  color: var(--blue-nav);
+}
+i.fa-trash:hover, i.fa-pen-to-square:hover{
+  color: var(--blue-dark);
+}
+.i-edit{
+  padding-right: 10px;
+}

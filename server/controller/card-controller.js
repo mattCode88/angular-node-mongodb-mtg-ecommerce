@@ -78,16 +78,33 @@ exports.deleteCard = async (req, res) => {
 
 exports.updateCard = async (req, res) => {
 
-  CardCollection.findByIdAndUpdate(req.body[1], req.body[0], { useFindAndModify: false })
+  // console.log(req.body[0].quantity)
+  if (req.body[0].quantity === 0) {
+    CardCollection.findByIdAndDelete(req.body[1])
     .then(data => {
-        if (!data) {
-            res.send(false)
-        } else {
-            res.send(true);
-        }
-    }).catch(err => {
-        res.send(false)
+      if(!data){
+          res.status(404).send(false)
+      }else{
+        res.send(true)
+      }
+    })
+    .catch(err =>{
+      res.status(500).send({
+          message: "Errore nell' aggiornamento delle informazioni!"
+      });
     });
+  } else {
+    CardCollection.findByIdAndUpdate(req.body[1], req.body[0], { useFindAndModify: false })
+      .then(data => {
+          if (!data) {
+              res.send(false)
+          } else {
+              res.send(true);
+          }
+      }).catch(err => {
+          res.send(false)
+      });
+  }
 
 }
 

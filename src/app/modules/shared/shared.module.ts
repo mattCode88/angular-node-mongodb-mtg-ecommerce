@@ -8,6 +8,7 @@ import { DashboardPanelComponent } from '../../components/shared/dashboard-panel
 import { ModalComponent } from '../../components/shared/modal/modal.component';
 import { CardFormComponent } from '../../components/shared/card-form/card-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardModule } from '../dashboard/dashboard.module';
 
 
 @NgModule({

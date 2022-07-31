@@ -96,6 +96,9 @@ export class ModalComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     // if (this.myCard) console.log(this.myCard)
+    // console.log(this.myCard)
+    // console.log(this.card)
+    // console.log(this.typeModal)
   }
 
 }
