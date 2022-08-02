@@ -163,5 +163,29 @@ exports.getOwnerCardForParameters = async (req, res) => {
 
 }
 
+exports.getAllCards = async (req, res) => {
+
+  const allCards = await CardCollection.find();
+
+  const filterCards = allCards.filter(card => card.toSell > 0);
+
+  res.send(filterCards);
+
+}
+
+exports.getAllCardsExcludingUser = async (req, res) => {
+
+  const filtro = {
+    $nor: [
+        { owner: req.params.username },
+    ]
+  }
+
+  const allCardsNotUser = await CardCollection.find(filtro);
+
+  res.send(allCardsNotUser);
+
+}
+
 
 

@@ -28,6 +28,14 @@ export class CardService {
     return this.http.post<SellCard[]>(`${this.ENDPOINT}/card/owner-card/card-parameters`, [owner, parameters]);
   }
 
+  getAllCards(): Observable<SellCard[]> {
+    return this.http.get<SellCard[]>(`${this.ENDPOINT}/card/all-cards`);
+  }
+
+  getAllCardsExcludingUser(username: string): Observable<SellCard[]> {
+    return this.http.get<SellCard[]>(`${this.ENDPOINT}/card/all-cards/${username}`);
+  }
+
   addCard(card: SellCard): Observable<any> {
     return this.http.post<SellCard>(`${this.ENDPOINT}/card/add`, card);
   }

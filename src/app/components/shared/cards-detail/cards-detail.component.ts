@@ -1,6 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import BuyCard from 'src/app/classes/BuyCard';
 import Card from 'src/app/classes/Card';
+import MyError from 'src/app/classes/MyError';
 import SellCard from 'src/app/classes/SellCard';
+import { AuthService } from 'src/app/services/auth.service';
+import { CarrelloService } from 'src/app/services/carrello.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cards-detail',
@@ -11,13 +17,21 @@ export class CardsDetailComponent implements OnInit {
 
   @Input() card?: Card;
   @Input() myCard?: SellCard;
+  @Input() homePage = false;
   @Output() cardDeletedConfirm: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() cartaModificata: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   visibility = false;
   typeModal = '';
+  quantity = 0;
+  username?: string;
+  myError: MyError = new MyError();
 
-  constructor() { }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router,
+    private readonly carrelloService: CarrelloService
+  ) { }
 
   openModal(typeModal?: string): void {
     if (typeModal) {
@@ -38,7 +52,64 @@ export class CardsDetailComponent implements OnInit {
     this.cartaModificata.emit(true);
   }
 
+  quantityFunction(value: string, card: SellCard): void {
+    if (value === 'minus') {
+      this.quantity--;
+      if (this.quantity < 0) this.quantity++;
+    }
+    if (value === 'plus') {
+      this.quantity++
+      if (this.quantity > card.toSell) this.quantity--;
+    }
+  }
+
+  cartFunction(card: SellCard): void {
+    this.myError.resetError();
+    if (!this.username) {
+      this.router.navigateByUrl('/auth/login');
+      return
+    };
+    if (this.quantity > 0) {
+
+      let cardToBuy: BuyCard = new BuyCard(
+        card._id!,
+        card.owner,
+        card.name,
+        card.colors,
+        card.image,
+        card.text,
+        card.types,
+        card.set,
+        card.rarity,
+        card.mana,
+        card.price,
+        card.quantity,
+        this.quantity,
+        this.username,
+        card.fidelity,
+        card.power,
+        card.toughness
+      );
+
+      this.carrelloService.addCardToCart(cardToBuy).subscribe(res => {
+        if (res) {
+          Swal.fire({
+            title: 'Carta aggiunta al carrello.',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          })
+        } else {
+          this.myError.setError(true, 'Carta già aggiunta al carrello.')
+        }
+      })
+    }
+
+    // console.log(this.quantity)
+    console.log(card._id)
+  }
+
   ngOnInit(): void {
+    this.username = this.authService.getLoggedIn()!;
   }
 
 }

@@ -10,6 +10,10 @@ router.post('/card/owner-card/card-parameters', cardController.getOwnerCardForPa
 
 router.get('/card/owner-card/:owner', cardController.getOwnerCard);
 
+router.get('/card/all-cards', cardController.getAllCards);
+
+router.get('/card/all-cards/:username', cardController.getAllCardsExcludingUser);
+
 router.delete('/card/delete/:id', cardController.deleteCard);
 
 router.put('/card/modifica', cardController.updateCard);

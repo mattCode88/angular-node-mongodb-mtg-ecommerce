@@ -1,11 +1,11 @@
-<ng-container *ngIf="card || myCard">
+<ng-container *ngIf="(card || myCard) && !homePage">
   <div class="row single-card">
     <div class="col-1 col-lg-2 col-xs-3">
       <img *ngIf="card" src="{{ card.image }}" (click)="openModal('image')" class="pointer" alt="">
       <img *ngIf="myCard" src="{{ myCard.image }}" (click)="openModal('image')" class="pointer" alt="">
     </div>
-    <div class="offset-1"></div>
-    <div class="col-9 col-lg-8 col-xs-7 description pointer" (click)="openModal('info')">
+    <!-- <div class="offset-1"></div> -->
+    <div class="offset-1 col-9 col-lg-8 col-xs-7 description pointer" (click)="openModal('info')">
       <h3 *ngIf="card">{{ card.name }}</h3>
       <h3 *ngIf="myCard">{{ myCard.name }}</h3>
       <div *ngIf="card">{{ card.set }}</div>
@@ -31,14 +31,48 @@
       </div>
     </ng-container>
   </div>
-  <ng-container *ngIf="card">
+  <!-- <ng-container *ngIf="card">
+    <app-modal (closeModal)="closeModal($event)" [visibility]="visibility" [card]="card" [typeModal]="typeModal"></app-modal>
+  </ng-container>
+  <ng-container *ngIf="myCard">
+    <app-modal (closeModal)="closeModal($event)" (cardModify)="cardModify($event)" (cardDeleted)="cardDeleted($event)" [visibility]="visibility" [myCard]="myCard" [typeModal]="typeModal"></app-modal>
+  </ng-container> -->
+</ng-container>
+
+<ng-container *ngIf="myCard && homePage">
+  <div class="row single-card">
+    <div class="col-1 col-lg-2 col-md-3 col-sm-4">
+      <img src="{{ myCard.image }}" (click)="openModal('image')" class="pointer" alt="">
+    </div>
+    <div class="offset-1 col-4 col-lg-3 col-sm-7 description pointer" (click)="openModal('info')">
+      <h3>{{ myCard.name }}</h3>
+      <div>{{ myCard.set }}</div>
+      <div>{{ myCard.rarity }}</div>
+      <div>
+        <span *ngFor="let color of myCard.colors"><i class="fa-solid fa-circle {{color}}"></i></span>
+      </div>
+    </div>
+    <div class="offset-1 col-3 col-md-6 offset-md-0 info">
+      <div><span>Venditore: </span><a href="">{{ myCard.owner }}</a></div>
+      <div><span>Prezzo:</span> {{ myCard.price }} €</div>
+      <div><span>Disponibilità:</span> {{ myCard.toSell }}</div>
+    </div>
+    <div class="col-2 col-md-6 cart flex">
+      <i (click)="quantityFunction('minus', myCard)" class="fa-solid fa-minus pointer"></i>
+      <input class="basic-input basic-input-1 align-center" type="number" value="{{quantity}}">
+      <i (click)="quantityFunction('plus', myCard)" class="fa-solid fa-plus pointer"></i>
+      <i (click)="cartFunction(myCard)" class="fa-solid fa-cart-shopping pointer"></i>
+    </div>
+    <p class="error mrg-top" *ngIf="myError.status">{{ myError.message }}</p>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="card">
     <app-modal (closeModal)="closeModal($event)" [visibility]="visibility" [card]="card" [typeModal]="typeModal"></app-modal>
   </ng-container>
   <ng-container *ngIf="myCard">
     <app-modal (closeModal)="closeModal($event)" (cardModify)="cardModify($event)" (cardDeleted)="cardDeleted($event)" [visibility]="visibility" [myCard]="myCard" [typeModal]="typeModal"></app-modal>
   </ng-container>
-
-</ng-container>
 
 
 

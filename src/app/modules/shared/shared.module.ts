@@ -8,9 +8,12 @@ import { DashboardPanelComponent } from '../../components/shared/dashboard-panel
 import { ModalComponent } from '../../components/shared/modal/modal.component';
 import { CardFormComponent } from '../../components/shared/card-form/card-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+// import { CardsSearchComponent } from 'src/app/components/shared/cards-search/cards-search.component';
+// import { CardsDetailComponent } from 'src/app/components/shared/cards-detail/cards-detail.component';
+import { CardsListComponent } from 'src/app/components/shared/cards-list/cards-list.component';
 import { CardsSearchComponent } from 'src/app/components/shared/cards-search/cards-search.component';
 import { CardsDetailComponent } from 'src/app/components/shared/cards-detail/cards-detail.component';
-import { CardsListComponent } from 'src/app/components/shared/cards-list/cards-list.component';
+// import { CardsListComponent } from 'src/app/components/shared/cards-list/cards-list.component';
 
 
 @NgModule({

@@ -63,30 +63,11 @@
         <button class="btn btn-red pointer" (click)="reset()">RESET</button>
       </div>
 
-      <!-- <div class="offset-1 col-11 offset-md-2 col-md-10 offset-xs-3 col-xs-9">
-        <div class="row">
-          <div class="col-6 div-btn">
-            <button class="btn-form pointer btn-green">CERCA</button>
-          </div>
-          <div class="col-6 pad-l">
-            <button class="btn-form pointer btn-red">RESET</button>
-          </div>
-        </div>
-
-      </div> -->
-
-      <!-- <div class="offset-1 col-5 offset-md-2 col-md-4 offset-sm-2 col-sm-10 offset-xs-3 col-xs-9">
-        <button class="btn-form pointer btn-green">CERCA</button>
-      </div>
-      <div class="col-6 offset-sm-2 col-sm-10 offset-xs-3 col-xs-9">
-        <button class="btn-form pointer btn-red">RESET</button>
-      </div> -->
-
     </div>
   </form>
 </ng-container>
 
-<div>ciao</div>
+<ng-container *ngIf="typeSearch === 'homeSearch'">ciao</ng-container>
 
 
 

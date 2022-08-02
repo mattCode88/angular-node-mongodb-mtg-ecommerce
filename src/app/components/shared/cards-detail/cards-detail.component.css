@@ -2,12 +2,15 @@ img{
   width: 100%;
 }
 .single-card{
-  margin: 25px 20px;
+  padding: 25px 20px;
 }
-.description>*{
+.description>*, .info>*, .cart{
   margin-top: 5px;
 }
 .add{
+  margin-top: 10px;
+}
+.mrg-top{
   margin-top: 10px;
 }
 i.fa-trash, i.fa-pen-to-square{
@@ -18,4 +21,37 @@ i.fa-trash:hover, i.fa-pen-to-square:hover{
 }
 .i-edit{
   padding-right: 10px;
+}
+.fa-plus{
+  color: var(--green-hover);
+  line-height: 40px;
+  margin: 0 10px;
+}
+.fa-minus{
+  color: var(--red-hover);
+  line-height: 40px;
+  margin-right: 10px;
+}
+.fa-cart-shopping{
+  color: var(--blue-nav);
+  line-height: 40px;
+}
+.fa-plus:hover {
+  color: var(--green);
+}
+.fa-minus:hover {
+  color: var(--red);
+}
+.fa-cart-shopping:hover {
+  color: var(--blue-dark);
+}
+.cart .basic-input{
+  width: 45px;
+}
+/* .cart i: */
+
+@media screen and (max-width: 991px){
+  .info, .cart{
+    margin-top: 20px;
+  }
 }

@@ -1,7 +1,13 @@
 <section class="section">
-  <p>home-page works!</p>
 
-  <app-cards-search></app-cards-search>
-  <!-- <app-card-form></app-card-form> -->
+  <div>
+    <app-cards-search [typeSearch]="typeSearch"></app-cards-search>
+  </div>
+
+
+  <ng-container *ngIf="myCardsArray.length > 0">
+    <app-cards-list [myCardsArray]="myCardsArray" [homePage]="homePage"></app-cards-list>
+  </ng-container>
+
 </section>
 

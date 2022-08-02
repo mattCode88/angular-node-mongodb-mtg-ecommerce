@@ -16,6 +16,7 @@ export class CardsListComponent implements OnInit, OnChanges {
 
   @Input() myCardsArray: SellCard[] = [];
   @Input() searchedCards: Card[] = [];
+  @Input() homePage = false;
   @Output() cardDeleted: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() cardModify: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -33,6 +34,8 @@ export class CardsListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    // console.log(this.myCardsArray)
+    // console.log(this.homePage)
   }
 
   ngOnChanges(): void {

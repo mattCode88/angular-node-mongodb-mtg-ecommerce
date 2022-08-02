@@ -7,6 +7,7 @@ const connectDb = require('./config/db-connection');
 const usersApi = require('./api/auth-api');
 const dashboardApi = require('./api/dashboard-api');
 const cardApi = require('./api/card-api');
+const carrelloApi = require('./api/carrello-api');
 
 
 
@@ -28,6 +29,7 @@ connectDb();
 app.use('/api', usersApi);
 app.use('/api', dashboardApi);
 app.use('/api', cardApi);
+app.use('/api', carrelloApi);
 
 
 app.listen(PORT, () => console.log(`Server in ascolto sula porta ${PORT}`));
