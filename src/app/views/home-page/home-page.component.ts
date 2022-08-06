@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import SellCard from 'src/app/classes/SellCard';
+import ISearchCard from 'src/app/interfaces/ISearchCard';
 import { AuthService } from 'src/app/services/auth.service';
 import { CardService } from 'src/app/services/card.service';
 
@@ -20,23 +21,58 @@ export class HomePageComponent implements OnInit {
     private readonly authService: AuthService
   ) { }
 
-  ngOnInit(): void {
+  searchEvent(event: ISearchCard): void {
+    if (this.username) {
+      if (event.cardName !== '') {
+        this.cardService.getCardForCardName(this.username!, event.cardName).subscribe(res => {
+          this.myCardsArray = res;
+        })
+      }
+      if (event.cardName === '') {
+        this.cardService.getCardForParameters(this.username!, event).subscribe(res => {
+          this.myCardsArray = res;
+        })
+      }
+    } else {
+      if (event.cardName !== '') {
+        this.cardService.getAllCardForCardName(event.cardName).subscribe(res => {
+          this.myCardsArray = res;
+        })
+      }
+      if (event.cardName === '') {
+        this.cardService.getAllCardForParameters(event).subscribe(res => {
+          this.myCardsArray = res;
+        })
+      }
+    }
 
-    this.username = this.authService.getLoggedIn()!;
+  }
+
+  resetSearchEvent(event: boolean): void {
+    if (event) {
+      this.gettingCards();
+    }
+  }
+
+  gettingCards(): void {
 
     if (!this.username) {
       this.cardService.getAllCards().subscribe(res => {
         this.myCardsArray = res;
       })
     }
-
     if (this.username) {
       this.cardService.getAllCardsExcludingUser(this.username).subscribe(res => {
         this.myCardsArray = res;
       })
-
     }
+  }
 
+  ngOnInit(): void {
+
+    this.username = this.authService.getLoggedIn()!;
+
+    this.gettingCards();
 
   }
 

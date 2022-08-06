@@ -7,6 +7,7 @@ import { VendiCartePageComponent } from '../../views/vendi-carte-page/vendi-cart
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { MieCartePageComponent } from '../../views/mie-carte-page/mie-carte-page.component';
+import { CarrelloPageComponent } from '../../views/carrello-page/carrello-page.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { MieCartePageComponent } from '../../views/mie-carte-page/mie-carte-page
     AccountPageComponent,
     VendiCartePageComponent,
     MieCartePageComponent,
+    CarrelloPageComponent,
   ],
   imports: [
     CommonModule,

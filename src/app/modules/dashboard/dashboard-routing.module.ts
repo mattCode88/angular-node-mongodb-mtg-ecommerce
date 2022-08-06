@@ -4,11 +4,13 @@ import { AccountPageComponent } from 'src/app/views/account-page/account-page.co
 import { LoggedInGuard } from 'src/app/guards/logged-in.guard';
 import { VendiCartePageComponent } from 'src/app/views/vendi-carte-page/vendi-carte-page.component';
 import { MieCartePageComponent } from 'src/app/views/mie-carte-page/mie-carte-page.component';
+import { CarrelloPageComponent } from 'src/app/views/carrello-page/carrello-page.component';
 
 const routes: Routes = [
   { path: 'account', component: AccountPageComponent, canActivate: [LoggedInGuard] },
   { path: 'vendi-carte', component: VendiCartePageComponent, canActivate: [LoggedInGuard] },
   { path: 'mie-carte', component: MieCartePageComponent, canActivate: [LoggedInGuard] },
+  { path: 'carrello', component: CarrelloPageComponent, canActivate: [LoggedInGuard] },
 ];
 
 @NgModule({

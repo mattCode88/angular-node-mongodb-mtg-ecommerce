@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import BuyCard from 'src/app/classes/BuyCard';
 import Card from 'src/app/classes/Card';
 import MyError from 'src/app/classes/MyError';
 import SellCard from 'src/app/classes/SellCard';
@@ -14,6 +15,7 @@ export class CardsListComponent implements OnInit, OnChanges {
 
   myError: MyError = new MyError();
 
+  @Input() carrelloCardsArray: BuyCard[] = [];
   @Input() myCardsArray: SellCard[] = [];
   @Input() searchedCards: Card[] = [];
   @Input() homePage = false;
@@ -34,8 +36,6 @@ export class CardsListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    // console.log(this.myCardsArray)
-    // console.log(this.homePage)
   }
 
   ngOnChanges(): void {

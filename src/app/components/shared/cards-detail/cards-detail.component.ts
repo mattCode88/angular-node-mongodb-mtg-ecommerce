@@ -17,6 +17,7 @@ export class CardsDetailComponent implements OnInit {
 
   @Input() card?: Card;
   @Input() myCard?: SellCard;
+  @Input() carrelloCard?: BuyCard;
   @Input() homePage = false;
   @Output() cardDeletedConfirm: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() cartaModificata: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -63,6 +64,39 @@ export class CardsDetailComponent implements OnInit {
     }
   }
 
+  quantityCart(value: string, card: BuyCard): void {
+    if (value === 'minus') {
+      card.buyQuantity--;
+      if (card.buyQuantity === 0) {
+        this.carrelloService.deleteCardToCart(card._id!).subscribe(res => {
+          if (res) {
+            Swal.fire({
+              title: 'Carta eliminata dal carrello.',
+              icon: 'success',
+              confirmButtonText: 'Ok'
+            })
+            this.cardDeletedConfirm.emit(true);
+          }
+        })
+      } else {
+        this.carrelloService.updateCardToCart(card, card._id!).subscribe(res => {
+          if (res) this.cartaModificata.emit(true);
+        })
+      }
+    }
+    if (value === 'plus') {
+      card.buyQuantity++;
+      if (card.buyQuantity > card.quantity) {
+        card.buyQuantity--
+      } else {
+        this.carrelloService.updateCardToCart(card, card._id!).subscribe(res => {
+          if (res) this.cartaModificata.emit(true);
+        })
+      }
+
+    }
+  }
+
   cartFunction(card: SellCard): void {
     this.myError.resetError();
     if (!this.username) {
@@ -83,7 +117,7 @@ export class CardsDetailComponent implements OnInit {
         card.rarity,
         card.mana,
         card.price,
-        card.quantity,
+        card.toSell,
         this.quantity,
         this.username,
         card.fidelity,
@@ -103,9 +137,6 @@ export class CardsDetailComponent implements OnInit {
         }
       })
     }
-
-    // console.log(this.quantity)
-    console.log(card._id)
   }
 
   ngOnInit(): void {

@@ -82,6 +82,7 @@ export class CardsSearchComponent implements OnInit, OnChanges {
   }
 
   reset(): void {
+
     this.searchCompleteForm.controls['cardName'].setValue('');
     this.searchCompleteForm.controls['set'].setValue('all');
     this.searchCompleteForm.controls['rarity'].setValue('all');
@@ -89,24 +90,32 @@ export class CardsSearchComponent implements OnInit, OnChanges {
     this.searchCompleteForm.controls['color'].setValue('all');
     this.searchCompleteForm.controls['mana'].setValue('all');
     this.resetSearchEvent.emit(true);
+
+
   }
 
   searchSubmit(): void {
+
     if (
       this.searchCompleteForm.value.cardName !== '' ||
       this.searchCompleteForm.value.set !== '' ||
+      this.searchCompleteForm.value.set !== 'all' ||
       this.searchCompleteForm.value.rarity !== '' ||
+      this.searchCompleteForm.value.rarity !== 'all' ||
       this.searchCompleteForm.value.type !== '' ||
+      this.searchCompleteForm.value.type !== 'all' ||
       this.searchCompleteForm.value.color !== '' ||
-      this.searchCompleteForm.value.mana !== ''
+      this.searchCompleteForm.value.color !== 'all' ||
+      this.searchCompleteForm.value.mana !== '' ||
+      this.searchCompleteForm.value.mana !== 'all'
     ) {
       this.searchEvent.emit(this.searchCompleteForm.value)
     }
 
-
   }
 
   ngOnChanges(): void {
+
     if (this.myCardsArray.length > 0) {
       this.myCardsArray.forEach(card => {
 
@@ -123,11 +132,10 @@ export class CardsSearchComponent implements OnInit, OnChanges {
         this.createArrayInput(this.arrayMana!, card.mana);
 
       })
-
     }
+
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

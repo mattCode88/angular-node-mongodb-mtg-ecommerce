@@ -1,0 +1,7 @@
+<section class="section">
+  <ng-container *ngIf="carrelloCardsArray">
+    <app-cards-list (cardModify)="cardModify($event)" (cardDeleted)="cardDeleted($event)" [carrelloCardsArray]="carrelloCardsArray"></app-cards-list>
+  </ng-container>
+  <ng-container *ngIf="totalPrice">{{totalPrice}}</ng-container>
+</section>
+

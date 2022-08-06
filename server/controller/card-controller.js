@@ -78,7 +78,6 @@ exports.deleteCard = async (req, res) => {
 
 exports.updateCard = async (req, res) => {
 
-  // console.log(req.body[0].quantity)
   if (req.body[0].quantity === 0) {
     CardCollection.findByIdAndDelete(req.body[1])
     .then(data => {
@@ -183,7 +182,141 @@ exports.getAllCardsExcludingUser = async (req, res) => {
 
   const allCardsNotUser = await CardCollection.find(filtro);
 
-  res.send(allCardsNotUser);
+  const filterrray = allCardsNotUser.filter(card => card.toSell > 0);
+
+  res.send(filterrray);
+
+}
+
+exports.getCardForCardName = async (req, res) => {
+
+  const searchCard = [];
+
+  const filtro = {
+    $nor: [
+        { owner: req.body[0] },
+    ]
+  }
+
+  const allCardsNotUser = await CardCollection.find(filtro);
+
+  allCardsNotUser.forEach(card => {
+    if (card.name.toLowerCase().includes(req.body[1].toLowerCase()) &&
+        card.toSell > 0) searchCard.push(card);
+  })
+
+  res.send(searchCard);
+
+}
+
+exports.getCardForParameters = async (req, res) => {
+
+  const filtro = {
+    $nor: [
+      { owner: req.body[0] },
+    ]
+  };
+
+  let campiRichiesti = 0;
+  let filterArray = [];
+
+  for (let campo in req.body[1]) {
+    if (req.body[1][campo] !== '' && req.body[1][campo] !== 'all') campiRichiesti++;
+  }
+
+  const allCardsNotUser = await CardCollection.find(filtro);
+
+  const workArray = allCardsNotUser.filter(card => card.toSell > 0);
+
+  workArray.forEach(card => {
+    let count = 0;
+    if (req.body[1].color !== '' && req.body[1].color !== 'all') {
+      card.colors.forEach(col => {
+        if (req.body[1].color === col) {
+          count++;
+        }
+      })
+    }
+    if (req.body[1].type !== '' && req.body[1].type !== 'all') {
+      card.types.forEach(ty => {
+        if (req.body[1].type === ty) {
+          count++;
+        }
+      })
+    }
+    if (
+      (req.body[1].set !== '' && req.body[1].set !== 'all') &&
+      card.set === req.body[1].set
+    ) count++;
+    if (
+      (req.body[1].rarity !== '' && req.body[1].rarity !== 'all') &&
+      card.rarity === req.body[1].rarity
+    ) count++;
+    if (
+      (req.body[1].mana !== '' && req.body[1].mana !== 'all') &&
+      card.mana === Number(req.body[1].mana)
+    ) count++;
+    if (campiRichiesti === count) filterArray.push(card);
+  })
+
+  res.send(filterArray)
+
+}
+
+exports.getAllCardForCardName = async (req, res) => {
+  const searchCard = [];
+  const allCards = await CardCollection.find();
+  const workArray = allCards.filter(card => card.toSell > 0);
+
+  workArray.forEach(card => {
+    if (card.name.toLowerCase().includes(req.params.cardName.toLowerCase())) searchCard.push(card);
+  })
+
+  res.send(searchCard);
+}
+
+exports.getAllCardForParameters = async (req, res) => {
+  const allCards = await CardCollection.find();
+  const workArray = allCards.filter(card => card.toSell > 0);
+  let campiRichiesti = 0;
+  let filterArray = [];
+
+  for (let campo in req.body) {
+    if (req.body[campo] !== '' && req.body[campo] !== 'all') campiRichiesti++;
+  }
+
+  workArray.forEach(card => {
+    let count = 0;
+    if (req.body.color !== '' && req.body.color !== 'all') {
+      card.colors.forEach(col => {
+        if (req.body.color === col) {
+          count++;
+        }
+      })
+    }
+    if (req.body.type !== '' && req.body.type !== 'all') {
+      card.types.forEach(ty => {
+        if (req.body.type === ty) {
+          count++;
+        }
+      })
+    }
+    if (
+      (req.body.set !== '' && req.body.set !== 'all') &&
+      card.set === req.body.set
+    ) count++;
+    if (
+      (req.body.rarity !== '' && req.body.rarity !== 'all') &&
+      card.rarity === req.body.rarity
+    ) count++;
+    if (
+      (req.body.mana !== '' && req.body.mana !== 'all') &&
+      card.mana === Number(req.body.mana)
+    ) count++;
+    if (campiRichiesti === count) filterArray.push(card);
+  })
+
+  res.send(filterArray)
 
 }
 

@@ -2,12 +2,22 @@
   <app-cards-detail *ngFor="let card of searchedCards" [card]="card"></app-cards-detail>
 </ng-container>
 
-<ng-container *ngIf="myCardsArray.length > 0">
+<ng-container *ngIf="myCardsArray && !homePage">
   <app-cards-detail
   (cartaModificata)="cartaModificata($event)"
   (cardDeletedConfirm)="cardDeletedConfirm($event)"
+  *ngFor="let myCard of myCardsArray"
+  [myCard]="myCard"></app-cards-detail>
+</ng-container>
+
+<ng-container *ngIf="myCardsArray && homePage">
+  <app-cards-detail
   [homePage]="homePage"
   *ngFor="let myCard of myCardsArray"
   [myCard]="myCard"></app-cards-detail>
+</ng-container>
+
+<ng-container *ngIf="carrelloCardsArray">
+  <app-cards-detail *ngFor="let carrelloCard of carrelloCardsArray" [carrelloCard]="carrelloCard" (cardDeletedConfirm)="cardDeletedConfirm($event)" (cartaModificata)="cartaModificata($event)"></app-cards-detail>
 </ng-container>
 

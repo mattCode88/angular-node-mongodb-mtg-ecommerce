@@ -48,7 +48,10 @@ i.fa-trash:hover, i.fa-pen-to-square:hover{
 .cart .basic-input{
   width: 45px;
 }
-/* .cart i: */
+.price{
+  line-height: 40px;
+  color: var(--blue-nav);
+}
 
 @media screen and (max-width: 991px){
   .info, .cart{

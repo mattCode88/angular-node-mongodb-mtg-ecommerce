@@ -9,7 +9,7 @@
 </form>
 </ng-container>
 
-<ng-container *ngIf="typeSearch === 'complete'">
+<ng-container *ngIf="typeSearch === 'complete' || typeSearch === 'homeSearch'">
   <form [formGroup]="searchCompleteForm" (ngSubmit)="searchSubmit()" class="advanced-search">
     <div class="row item-center">
 
@@ -60,14 +60,13 @@
 
       <div class="col-12 flex container-btn">
         <button class="btn btn-green pointer" type="submit">CERCA</button>
-        <button class="btn btn-red pointer" (click)="reset()">RESET</button>
+        <button class="btn btn-red pointer" type="button" (click)="reset()">RESET</button>
       </div>
 
     </div>
   </form>
 </ng-container>
 
-<ng-container *ngIf="typeSearch === 'homeSearch'">ciao</ng-container>
 
 
 

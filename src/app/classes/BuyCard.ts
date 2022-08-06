@@ -17,6 +17,7 @@ export default class BuyCard {
   fidelity?: string;
   power?: string;
   toughness?: string;
+  _id?: string;
 
   constructor(
     idCard: string,
@@ -35,7 +36,8 @@ export default class BuyCard {
     buyer: string,
     fidelity?: string,
     power?: string,
-    toughness?: string
+    toughness?: string,
+    _id?: string
   ) {
     this.idCard = idCard;
     this.owner = owner;
@@ -54,6 +56,7 @@ export default class BuyCard {
     this.fidelity = fidelity;
     this.power = power;
     this.toughness = toughness;
+    this._id = _id;
   }
 
 }

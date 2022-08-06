@@ -39,3 +39,43 @@ exports.addCardToCart = async (req, res) => {
   }
 
 }
+
+exports.getCardToCart = async (req, res) => {
+
+  if (req.params.buyer) {
+    const buyersCards = await CarrelloCollection.find({ buyer: req.params.buyer });
+    res.send(buyersCards)
+  }
+
+}
+
+exports.updateCardToCart = async (req, res) => {
+  CarrelloCollection.findByIdAndUpdate(req.body[1], req.body[0], { useFindAndModify: false })
+      .then(data => {
+          if (!data) {
+              res.send(false)
+          } else {
+              res.send(true);
+          }
+      }).catch(err => {
+          res.send(false)
+      });
+}
+
+exports.deleteCardToCart = async (req, res) => {
+  if (req.params.id) {
+    CarrelloCollection.findByIdAndDelete(req.params.id)
+    .then(data => {
+      if(!data){
+          res.status(404).send({ message : `La carta con id: ${req.params.id} non è stata trovata!`})
+      }else{
+        res.send(true)
+      }
+    })
+    .catch(err =>{
+      res.status(500).send({
+          message: "Errore nell' aggiornamento delle informazioni!"
+      });
+    });
+  }
+}

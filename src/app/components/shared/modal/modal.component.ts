@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import BuyCard from 'src/app/classes/BuyCard';
 import Card from 'src/app/classes/Card';
 import MyError from 'src/app/classes/MyError';
 import SellCard from 'src/app/classes/SellCard';
@@ -17,6 +18,7 @@ export class ModalComponent implements OnInit, OnChanges {
   @Input() visibility = false;
   @Input() card?: Card;
   @Input() myCard?: SellCard;
+  @Input() carrelloCard?: BuyCard;
   @Input() typeModal?: string;
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() cardDeleted: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -95,10 +97,6 @@ export class ModalComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    // if (this.myCard) console.log(this.myCard)
-    // console.log(this.myCard)
-    // console.log(this.card)
-    // console.log(this.typeModal)
   }
 
 }

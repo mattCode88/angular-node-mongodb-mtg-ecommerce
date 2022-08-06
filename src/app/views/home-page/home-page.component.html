@@ -1,11 +1,15 @@
 <section class="section">
 
   <div>
-    <app-cards-search [typeSearch]="typeSearch"></app-cards-search>
+    <app-cards-search
+    [typeSearch]="typeSearch"
+    [myCardsArray]="myCardsArray"
+    (searchEvent)="searchEvent($event)"
+    (resetSearchEvent)="resetSearchEvent($event)"
+    ></app-cards-search>
   </div>
 
-
-  <ng-container *ngIf="myCardsArray.length > 0">
+  <ng-container *ngIf="myCardsArray">
     <app-cards-list [myCardsArray]="myCardsArray" [homePage]="homePage"></app-cards-list>
   </ng-container>
 

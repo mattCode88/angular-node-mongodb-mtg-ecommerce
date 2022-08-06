@@ -13,6 +13,6 @@
     </li>
     <li [ngClass]="selezionato === 'acquisti' ? 'blue-dark' : 'blue-nav'"><a (click)="closeMenuVendite()" (click)="changeColor('acquisti')" class="pointer">ACQUISTI</a></li>
     <li [ngClass]="selezionato === 'messaggi' ? 'blue-dark' : 'blue-nav'"><a (click)="closeMenuVendite()" (click)="changeColor('messaggi')" class="pointer">MESSAGGI</a></li>
-    <li [ngClass]="selezionato === 'carrello' ? 'blue-dark' : 'blue-nav'"><a (click)="closeMenuVendite()" (click)="changeColor('carrello')" class="pointer">CARRELLO</a></li>
+    <li [ngClass]="selezionato === 'carrello' ? 'blue-dark' : 'blue-nav'"><a (click)="closeMenuVendite()" (click)="changeColor('carrello')" class="pointer" routerLink="/dashboard/carrello">CARRELLO</a></li>
   </ul>
 </nav>

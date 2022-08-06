@@ -1,4 +1,4 @@
-<ng-container *ngIf="visibility && (card || myCard)">
+<ng-container *ngIf="visibility && (card || myCard || carrelloCard)">
   <div id="myModal" class="modal">
   <div class="modal-content">
 
@@ -43,14 +43,15 @@
       <div><button (click)="deleteCards(myCard)" class="btn btn-green pointer btn2-section mrg-bottom">Conferma</button></div>
     </ng-container>
 
-    <ng-container *ngIf="(typeModal === 'image' && myCard) || (typeModal === 'image' && card)">
+    <ng-container *ngIf="(typeModal === 'image' && myCard) || (typeModal === 'image' && card) || (typeModal === 'image' && carrelloCard)">
       <div class="myCard-image-container align-center">
         <img *ngIf="myCard" class="myCard-image" src="{{ myCard.image }}" alt="">
         <img *ngIf="card" class="myCard-image" src="{{ card.image }}" alt="">
+        <img *ngIf="carrelloCard" class="myCard-image" src="{{ carrelloCard.image }}" alt="">
       </div>
     </ng-container>
 
-    <ng-container *ngIf="(typeModal === 'info' && myCard) || (typeModal === 'info' && card)">
+    <ng-container *ngIf="(typeModal === 'info' && myCard) || (typeModal === 'info' && card) || (typeModal === 'info' && carrelloCard)">
       <ng-container *ngIf="myCard">
         <div class="row">
           <h4 class="col-2 col-xs-3">Nome: </h4>
@@ -87,6 +88,24 @@
         <div class="col-10 col-xs-9 pd-bottom">{{ card.text }}</div>
         </div>
       </ng-container>
+      <ng-container *ngIf="carrelloCard">
+        <div class="row">
+          <h4 class="col-2 col-xs-3">Nome: </h4>
+        <div class="col-10 col-xs-9">{{ carrelloCard.name }}</div>
+        <h4 class="col-2 col-xs-3">Edizione: </h4>
+        <div class="col-10 col-xs-9">{{ carrelloCard.set }}</div>
+        <h4 class="col-2 col-xs-3">Rarità: </h4>
+        <div class="col-10 col-xs-9">{{ carrelloCard.rarity }}</div>
+        <h4 class="col-2 col-xs-3">Mana: </h4>
+        <div class="col-10 col-xs-9">{{ carrelloCard.mana }}</div>
+        <h4 class="col-2 col-xs-3">Colori: </h4>
+        <div class="col-10 col-xs-9">
+          <span *ngFor="let color of carrelloCard.colors">{{ color }} </span>
+        </div>
+        <h4 class="col-2 col-xs-3">Testo: </h4>
+        <div class="col-10 col-xs-9 pd-bottom">{{ carrelloCard.text }}</div>
+        </div>
+      </ng-container>
     </ng-container>
 
     <div>
@@ -97,5 +116,4 @@
 </div>
 </ng-container>
 
-<!-- <ng-container *ngIf="visibility && typeModal === 'edit'">edit</ng-container> -->
 

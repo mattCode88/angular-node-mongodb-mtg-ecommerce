@@ -18,4 +18,16 @@ export class CarrelloService {
     return this.http.post<boolean>(`${this.ENDPOINT}/cart/buy-card`, card);
   }
 
+  getCardToCart(buyer: string): Observable<BuyCard[]> {
+    return this.http.get<BuyCard[]>(`${this.ENDPOINT}/cart/buy/${buyer}`);
+  }
+
+  updateCardToCart(card: BuyCard, id: string): Observable<boolean> {
+    return this.http.put<boolean>(`${this.ENDPOINT}/cart/modifica`, [card, id]);
+  }
+
+  deleteCardToCart(cardId: string): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.ENDPOINT}/cart/delete/${cardId}`);
+  }
+
 }
