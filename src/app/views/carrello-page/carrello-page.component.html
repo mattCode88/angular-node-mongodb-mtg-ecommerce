@@ -2,6 +2,16 @@
   <ng-container *ngIf="carrelloCardsArray">
     <app-cards-list (cardModify)="cardModify($event)" (cardDeleted)="cardDeleted($event)" [carrelloCardsArray]="carrelloCardsArray"></app-cards-list>
   </ng-container>
-  <ng-container *ngIf="totalPrice">{{totalPrice}}</ng-container>
+  <ng-container *ngIf="totalPrice">
+    <div class="row">
+      <div class="col-6 offset-6 totale-carrello">
+        <span>Totale carrello: </span>{{totalPrice}} €
+      </div>
+      <div class="col-6 offset-6">
+        <button routerLink="/home" class="btn pointer col-6">Continua gli acquisti</button>
+        <button routerLink="/dashboard/ordine" class="btn pointer col-6">Procedi con l' ordine</button>
+      </div>
+    </div>
+  </ng-container>
 </section>
 

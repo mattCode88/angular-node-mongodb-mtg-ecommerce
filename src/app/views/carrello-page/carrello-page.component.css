@@ -1,0 +1,10 @@
+.totale-carrello{
+  background-color: var(--blue-nav);
+  color: #fff;
+  padding: 20px 0;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 20px;
+}

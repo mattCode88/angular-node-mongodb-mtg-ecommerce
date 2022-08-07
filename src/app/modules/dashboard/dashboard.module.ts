@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { MieCartePageComponent } from '../../views/mie-carte-page/mie-carte-page.component';
 import { CarrelloPageComponent } from '../../views/carrello-page/carrello-page.component';
+import { OrderPageComponent } from '../../views/order-page/order-page.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { CarrelloPageComponent } from '../../views/carrello-page/carrello-page.c
     VendiCartePageComponent,
     MieCartePageComponent,
     CarrelloPageComponent,
+    OrderPageComponent,
   ],
   imports: [
     CommonModule,
