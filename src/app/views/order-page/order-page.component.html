@@ -1,1 +1,54 @@
-<p>order-page works!</p>
+<section class="section">
+
+  <ng-container *ngIf="!report">
+    <h2>Seleziona il tipo di spedizione</h2>
+    <form [formGroup]="formShipment" (ngSubmit)="onSubmit()">
+      <div>
+        <input type="radio" value="corriere" id="corriere" name="shipment" formControlName="shipment">
+        <label for="corriere">Corriere Espresso(5 €)</label>
+      </div>
+      <div>
+        <input type="radio" value="raccomandata" id="raccomandata" name="shipment" formControlName="shipment">
+        <label for="raccomandata">Raccomandata(10 €)</label>
+      </div>
+      <button [disabled]="!formShipment.valid" type="submit">vai</button>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="report && userInfo && chooseShipment">
+    <h2 class="mrg-bottom">Riepilogo ordine</h2>
+    <div class="row">
+      <div class="col-3 col-md-6">Destinatario:</div>
+      <div class="offset-1 col-8 offset-md-0 col-md-6">{{ userInfo.nome }} {{ userInfo.cognome }}</div>
+      <div class="col-3 col-md-6">Indirizzo:</div>
+      <div class="offset-1 col-8 offset-md-0 col-md-6">{{ userInfo.via }}{{ userInfo.nCivico }} {{ userInfo.cap }} {{ userInfo.citta }} {{ userInfo.nazione }}</div>
+      <div class="col-3 col-md-6">Spedizione:</div>
+      <div class="offset-1 col-8 offset-md-0 col-md-6">{{ chooseShipment }}</div>
+      <div class="col-3 col-md-6 mrg-top">Carrello:</div>
+      <div class="offset-1 col-1 offset-md-0 col-md-1 col-xs-2 mrg-top">Quantità:</div>
+      <div class="offset-1 col-6 col-md-4 col-xs-3 mrg-top">Prezzo:</div>
+      <div class="col-12" *ngFor="let card of carrelloCardsArray">
+        <div class="row">
+          <div class="col-3 col-md-6">{{ card.name }}</div>
+          <div class="offset-1 col-1 offset-md-0 col-md-1 col-xs-2">{{ card.buyQuantity }}</div>
+          <div class="offset-1 col-6 col-md-4 col-xs-3">{{ card.buyQuantity * card.price }} €</div>
+        </div>
+      </div>
+      <div class="col-3 col-md-8 col-xs-9 mrg-bottom mrg-top">Totale:</div>
+      <div class="offset-3 col-6 offset-md-0 col-md-4 col-xs-3 mrg-bottom mrg-top">{{ totalPrice }} €</div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="totalPrice && report">
+    <h2>Pagamento</h2>
+    <ngx-braintree
+      [clientTokenURL]="'http://localhost:3000/api/token'"
+      [createPurchaseURL]="'http://localhost:3000/api/checkout'"
+      [chargeAmount]=totalPrice
+      [buttonText]="'Invia il pagamento'"
+      (paymentStatus)="onPaymentStatus($event)">
+    </ngx-braintree>
+  </ng-container>
+
+</section>
+

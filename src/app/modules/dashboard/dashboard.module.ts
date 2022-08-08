@@ -9,6 +9,9 @@ import { SharedModule } from '../shared/shared.module';
 import { MieCartePageComponent } from '../../views/mie-carte-page/mie-carte-page.component';
 import { CarrelloPageComponent } from '../../views/carrello-page/carrello-page.component';
 import { OrderPageComponent } from '../../views/order-page/order-page.component';
+import { NgxBraintreeModule } from 'ngx-braintree';
+import { HttpClientModule } from '@angular/common/http';
+import { AcquistiPendingPageComponent } from '../../views/acquisti-pending-page/acquisti-pending-page.component';
 
 
 @NgModule({
@@ -18,12 +21,15 @@ import { OrderPageComponent } from '../../views/order-page/order-page.component'
     MieCartePageComponent,
     CarrelloPageComponent,
     OrderPageComponent,
+    AcquistiPendingPageComponent,
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     ReactiveFormsModule,
     SharedModule,
+    NgxBraintreeModule,
+    HttpClientModule
   ]
 })
 export class DashboardModule { }
