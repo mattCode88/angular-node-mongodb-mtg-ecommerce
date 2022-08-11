@@ -1,18 +1,75 @@
 <nav class="dashboard-nav">
   <ul class="flex item-center justify-center">
-    <li [ngClass]="selezionato === 'account' ? 'blue-dark' : 'blue-nav'"><a (click)="closeMenuVendite()" (click)="changeColor('account')" routerLink="/dashboard/account">ACCOUNT</a></li>
+    <li [ngClass]="selezionato === 'account' ? 'blue-dark' : 'blue-nav'">
+      <a
+      (click)="closeMenuVendite()"
+      (click)="changeColor('account')"
+      routerLink="/dashboard/account">
+        ACCOUNT
+      </a>
+    </li>
     <li [ngClass]="selezionato === 'vendite' ? 'blue-dark' : 'blue-nav'">
-      <!-- <a (click)="changeColor('vendite')" routerLink="/dashboard/vendi-carte">VENDITE</a> -->
-      <a class="pointer" (click)="changeMenuVendite()">VENDITE</a>
+      <a
+      class="pointer"
+      (click)="changeMenuVendite()">
+        VENDITE
+      </a>
       <ng-container *ngIf="menuVendite">
         <div>
-        <div><a (click)="changeColor('vendite')" (click)="changeMenuVendite()" routerLink="/dashboard/vendi-carte" class="pointer">Metti in vendita</a></div>
-        <div><a (click)="changeColor('vendite')" (click)="changeMenuVendite()" routerLink="/dashboard/mie-carte" class="pointer">Le mie carte</a></div>
-      </div>
+          <div>
+            <a
+            (click)="changeColor('vendite')"
+            (click)="changeMenuVendite()"
+            routerLink="/dashboard/vendi-carte"
+            class="pointer">
+              Metti in vendita
+            </a>
+          </div>
+          <div>
+            <a
+            (click)="changeColor('vendite')"
+            (click)="changeMenuVendite()"
+            routerLink="/dashboard/mie-carte"
+            class="pointer">
+              Le mie carte
+            </a>
+          </div>
+          <div>
+            <a
+            (click)="changeColor('vendite')"
+            (click)="changeMenuVendite()"
+            routerLink="/dashboard/vendite"
+            class="pointer">
+              Vendute
+            </a>
+          </div>
+        </div>
       </ng-container>
     </li>
-    <li [ngClass]="selezionato === 'acquisti' ? 'blue-dark' : 'blue-nav'"><a (click)="closeMenuVendite()" (click)="changeColor('acquisti')" class="pointer">ACQUISTI</a></li>
-    <li [ngClass]="selezionato === 'messaggi' ? 'blue-dark' : 'blue-nav'"><a (click)="closeMenuVendite()" (click)="changeColor('messaggi')" class="pointer">MESSAGGI</a></li>
-    <li [ngClass]="selezionato === 'carrello' ? 'blue-dark' : 'blue-nav'"><a (click)="closeMenuVendite()" (click)="changeColor('carrello')" class="pointer" routerLink="/dashboard/carrello">CARRELLO</a></li>
+    <li [ngClass]="selezionato === 'acquisti' ? 'blue-dark' : 'blue-nav'">
+      <a
+      (click)="closeMenuVendite()"
+      (click)="changeColor('acquisti')"
+      class="pointer">
+        ACQUISTI
+      </a>
+    </li>
+    <li [ngClass]="selezionato === 'messaggi' ? 'blue-dark' : 'blue-nav'">
+      <a
+      (click)="closeMenuVendite()"
+      (click)="changeColor('messaggi')"
+      class="pointer">
+        MESSAGGI
+      </a>
+    </li>
+    <li [ngClass]="selezionato === 'carrello' ? 'blue-dark' : 'blue-nav'">
+      <a
+      (click)="closeMenuVendite()"
+      (click)="changeColor('carrello')"
+      class="pointer"
+      routerLink="/dashboard/carrello">
+        CARRELLO
+      </a>
+    </li>
   </ul>
 </nav>

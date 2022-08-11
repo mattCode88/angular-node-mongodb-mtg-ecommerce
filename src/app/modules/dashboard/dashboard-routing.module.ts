@@ -7,6 +7,7 @@ import { MieCartePageComponent } from 'src/app/views/mie-carte-page/mie-carte-pa
 import { CarrelloPageComponent } from 'src/app/views/carrello-page/carrello-page.component';
 import { OrderPageComponent } from 'src/app/views/order-page/order-page.component';
 import { AcquistiPendingPageComponent } from 'src/app/views/acquisti-pending-page/acquisti-pending-page.component';
+import { CarteVendutePageComponent } from 'src/app/views/carte-vendute-page/carte-vendute-page.component';
 
 const routes: Routes = [
   { path: 'account', component: AccountPageComponent, canActivate: [LoggedInGuard] },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'carrello', component: CarrelloPageComponent, canActivate: [LoggedInGuard] },
   { path: 'ordine', component: OrderPageComponent, canActivate: [LoggedInGuard] },
   { path: 'acquisti/pending', component: AcquistiPendingPageComponent, canActivate: [LoggedInGuard] },
+  { path: 'vendite', component: CarteVendutePageComponent, canActivate: [LoggedInGuard] },
 ];
 
 @NgModule({

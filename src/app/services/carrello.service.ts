@@ -30,4 +30,8 @@ export class CarrelloService {
     return this.http.delete<boolean>(`${this.ENDPOINT}/cart/delete/${cardId}`);
   }
 
+  deleteAllCardToCart(buyer: string): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.ENDPOINT}/cart/delete/all/${buyer}`);
+  }
+
 }

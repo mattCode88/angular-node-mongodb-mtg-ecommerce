@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import BuyCard from '../classes/BuyCard';
+import CardPurchased from '../classes/CardPurchased';
 import SellCard from '../classes/SellCard';
 import ISearchCard from '../interfaces/ISearchCard';
 import ISearchParameter from '../interfaces/ISearchParameter';
@@ -60,8 +62,16 @@ export class CardService {
     return this.http.put<boolean>(`${this.ENDPOINT}/card/modifica`, [card, id]);
   }
 
+  updateManyCard(cards: BuyCard[]): Observable<boolean> {
+    return this.http.put<boolean>(`${this.ENDPOINT}/card/modifica/many`, cards);
+  }
+
   deleteCard(id: string): Observable<boolean> {
     return this.http.delete<boolean>(`${this.ENDPOINT}/card/delete/${id}`);
+  }
+
+  createPurchaseOrder(cards: CardPurchased[]): Observable<boolean> {
+    return this.http.post<boolean>(`${this.ENDPOINT}/card/purchase/add`, cards);
   }
 
 }

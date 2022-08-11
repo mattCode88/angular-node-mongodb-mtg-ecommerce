@@ -10,6 +10,8 @@ router.put('/cart/modifica', carrelloController.updateCardToCart);
 
 router.delete('/cart/delete/:id', carrelloController.deleteCardToCart);
 
+router.delete('/cart/delete/all/:buyer', carrelloController.deleteAllCardToCart);
+
 
 
 

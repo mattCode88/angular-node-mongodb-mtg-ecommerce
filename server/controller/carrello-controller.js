@@ -79,3 +79,21 @@ exports.deleteCardToCart = async (req, res) => {
     });
   }
 }
+
+exports.deleteAllCardToCart = async (req, res) => {
+  if (req.params.buyer) {
+    CarrelloCollection.deleteMany({ buyer: req.params.buyer })
+    .then(data => {
+      if(!data){
+          res.status(404).send({ message : `La carta con buyer: ${req.params.buyer} non sono state trovate!`})
+      }else{
+        res.send(true)
+      }
+    })
+    .catch(err =>{
+      res.status(500).send({
+          message: "Errore nell' aggiornamento delle informazioni!"
+      });
+    });
+  }
+}

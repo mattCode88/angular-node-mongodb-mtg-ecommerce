@@ -1,4 +1,5 @@
 const CardCollection = require('../model/Card');
+const CardPurchasedCollection = require('../model/CardPurchased');
 const MyValidator = require('../validators/my-validator');
 
 exports.addCard = async (req, res) => {
@@ -317,6 +318,94 @@ exports.getAllCardForParameters = async (req, res) => {
   })
 
   res.send(filterArray)
+
+}
+
+exports.updateManyCard = async (req, res) => {
+
+  let cardsToUpdate = req.body;
+  let allCards = await CardCollection.find();
+
+  allCards.forEach(card => {
+    cardsToUpdate.forEach(cardToUpdate => {
+      if (cardToUpdate.idCard === card._id.toString()) {
+        let newToSell = card.toSell - cardToUpdate.buyQuantity;
+
+        if (newToSell === 0) {
+
+          if (card.quantity === card.toSell) {
+            CardCollection.findByIdAndDelete(card._id.toString())
+              .then(data => console.log('carta eliminata')).catch(err => res.send(false))
+          }
+          if (card.quantity > card.toSell) {
+            let newQuantity = card.quantity - cardToUpdate.buyQuantity;
+            CardCollection.findByIdAndUpdate(card._id.toString(), { quantity: newQuantity, toSell: newToSell }, { useFindAndModify: false })
+            .then(res => console.log('carta modificata')).catch(err => res.send(false))
+          }
+
+        }
+
+        if (newToSell > 0) {
+
+          let newQuantity = card.quantity - cardToUpdate.buyQuantity;
+          CardCollection.findByIdAndUpdate(card._id.toString(), { quantity: newQuantity, toSell: newToSell }, { useFindAndModify: false })
+            .then(res => console.log('carta modificata')).catch(err => res.send(false))
+        }
+
+      };
+    })
+  })
+
+  res.send(true);
+
+}
+
+exports.createPurchaseOrder = async (req, res) => {
+
+  if (req.body) {
+
+    let cards = [];
+
+    req.body.forEach(card => {
+      let newCard = {
+        owner: card.owner,
+        name: card.name,
+        colors: card.colors,
+        image: card.image,
+        text: card.text,
+        types: card.types,
+        set: card.set,
+        rarity: card.rarity,
+        mana: card.mana,
+        price: card.price,
+        buyQuantity: card.buyQuantity,
+        buyer: card.buyer,
+        fidelity: card.fidelity,
+        power: card.power,
+        toughness: card.toughness,
+      }
+      cards.push(newCard);
+    })
+
+    const cardPurchased = new CardPurchasedCollection({
+      order: req.body[0].order,
+      cards: cards
+    })
+
+    cardPurchased.save(cardPurchased)
+      .then(data => {
+        if(!data){
+          res.status(404).send({ message : `Ordine non effettuato`})
+        }else{
+          res.send(true)
+        }
+      }).catch(err =>{
+          res.status(500).send({
+            message: "Errore nell' aggiornamento delle informazioni!"
+          });
+        });
+
+  }
 
 }
 

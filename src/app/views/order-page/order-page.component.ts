@@ -2,10 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import BuyCard from 'src/app/classes/BuyCard';
+import CardPurchased from 'src/app/classes/CardPurchased';
+import Order from 'src/app/classes/Order';
 import IUser from 'src/app/interfaces/IUser';
 import { AuthService } from 'src/app/services/auth.service';
+import { CardService } from 'src/app/services/card.service';
 import { CarrelloService } from 'src/app/services/carrello.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order-page',
@@ -26,6 +30,7 @@ export class OrderPageComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly carrelloService: CarrelloService,
     private readonly dashboardService: DashboardService,
+    private readonly cardService: CardService,
     private readonly router: Router,
     private readonly builder: FormBuilder,
   ) {
@@ -36,7 +41,6 @@ export class OrderPageComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.formShipment.value)
     if (this.formShipment.value) {
       if (this.formShipment.value.shipment === 'corriere') {
         this.totalPrice += 5;
@@ -50,9 +54,67 @@ export class OrderPageComponent implements OnInit {
   }
 
   onPaymentStatus(event: any): void {
-    console.log(event)
-    if (event.success) {
-      this.router.navigateByUrl('/acquisti/pending')
+
+    if (event.success && this.chooseShipment && this.totalPrice) {
+
+      const orderString = new Date().getTime().toString();
+      const order = new Order(
+        this.carrelloCardsArray[0].owner,
+        this.carrelloCardsArray[0].buyer,
+        false,
+        false,
+        orderString,
+        this.chooseShipment,
+        this.totalPrice
+      );
+      const arrayPurchase: CardPurchased[] = this.carrelloCardsArray.map(card =>
+        new CardPurchased(
+          card.owner,
+          card.name,
+          card.colors,
+          card.image,
+          card.text,
+          card.types,
+          card.set,
+          card.rarity,
+          card.mana,
+          card.price,
+          card.buyQuantity,
+          card.buyer,
+          orderString,
+          card.fidelity,
+          card.power,
+          card.toughness
+        )
+      );
+
+      this.dashboardService.createNewOrder(order).subscribe(res => {
+
+        if (res) {
+          this.cardService.createPurchaseOrder(arrayPurchase).subscribe(res => {
+
+            if (res) {
+              this.carrelloService.deleteAllCardToCart(this.username!).subscribe(res => {
+
+                if (res) {
+                  this.cardService.updateManyCard(this.carrelloCardsArray).subscribe(response => {
+
+                    if (res) {
+                      Swal.fire({
+                        title: 'Pagamento effettuato!',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                      })
+                      this.router.navigateByUrl('/vendite')
+                    }
+                  })
+                }
+              })
+            }
+          })
+        }
+      })
+
     }
   }
 
@@ -61,13 +123,13 @@ export class OrderPageComponent implements OnInit {
     if (this.username) {
       this.dashboardService.getInfoUser(this.username).subscribe(res => {
         this.userInfo = res;
-        console.log(this.userInfo)
       })
       this.carrelloService.getCardToCart(this.username).subscribe(res => {
         this.carrelloCardsArray = res;
         this.carrelloCardsArray.forEach(card => this.totalPrice += (card.price * card.buyQuantity));
       })
     }
+
   }
 
 }
