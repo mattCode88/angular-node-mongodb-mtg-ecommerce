@@ -50,14 +50,17 @@
 }
 
 @media screen and (max-width: 575px){
-  .mrg-top{
+  /* .mrg-top{
     margin-top: 20px;
-  }
+  } */
 }
 
 @media screen and (max-width: 991px){
   .myCard-image {
       width: 50%;
+    }
+    .mrg-top {
+      margin-top: 20px;
     }
 }
 

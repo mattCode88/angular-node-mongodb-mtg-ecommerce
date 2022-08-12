@@ -90,29 +90,29 @@ export class OrderPageComponent implements OnInit {
 
       this.dashboardService.createNewOrder(order).subscribe(res => {
 
+        // if (res) {
+        // this.cardService.createPurchaseOrder(arrayPurchase).subscribe(res => {
+
         if (res) {
-          this.cardService.createPurchaseOrder(arrayPurchase).subscribe(res => {
+          this.carrelloService.deleteAllCardToCart(this.username!).subscribe(res => {
 
             if (res) {
-              this.carrelloService.deleteAllCardToCart(this.username!).subscribe(res => {
+              this.cardService.updateManyCard(this.carrelloCardsArray).subscribe(response => {
 
                 if (res) {
-                  this.cardService.updateManyCard(this.carrelloCardsArray).subscribe(response => {
-
-                    if (res) {
-                      Swal.fire({
-                        title: 'Pagamento effettuato!',
-                        icon: 'success',
-                        confirmButtonText: 'Ok'
-                      })
-                      this.router.navigateByUrl('/vendite')
-                    }
+                  Swal.fire({
+                    title: 'Pagamento effettuato!',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
                   })
+                  this.router.navigateByUrl('/vendite')
                 }
               })
             }
           })
         }
+        // })
+        // }
       })
 
     }

@@ -4,17 +4,17 @@
 
     <ng-container *ngIf="typeModal === 'add' && card">
       <div class="row">
-        <img class="col-3 col-md-4 col-sm-5 col-xs-12" src="{{ card.image }}" alt="">
-        <div class="offset-1 col-8 col-md-7 col-sm-6 col-xs-12 mrg-top">
+        <img class="col-3 col-lg-5 offset-md-2 col-md-8 offset-sm-1 col-sm-10" src="{{ card.image }}" alt="">
+        <div class="offset-1 col-8 col-lg-6 col-md-12 mrg-top">
           <h3>{{ card.name }}</h3>
           <div class="mrg-top">{{ card.set }}</div>
           <div class="mrg-top">{{ card.rarity }}</div>
-        <div class="mrg-top">
-          <span *ngFor="let color of card.colors"><i class="fa-solid fa-circle {{color}}"></i></span>
-        </div>
-        <div class="mrg-top">
-          <app-card-form (sendPrice)="takePrice($event)"></app-card-form>
-        </div>
+          <div class="mrg-top">
+            <span *ngFor="let color of card.colors"><i class="fa-solid fa-circle {{color}}"></i></span>
+          </div>
+          <div class="mrg-top">
+            <app-card-form (sendPrice)="takePrice($event)"></app-card-form>
+          </div>
           <p class="error" *ngIf="myError.status">*{{myError.message}}</p>
         </div>
     </div>
@@ -22,17 +22,17 @@
 
     <ng-container *ngIf="typeModal === 'edit' && myCard">
       <div class="row">
-        <img class="col-3 col-md-4 col-sm-5 col-xs-12" src="{{ myCard.image }}" alt="">
-        <div class="offset-1 col-8 col-md-7 col-sm-6 col-xs-12 mrg-top">
+        <img class="col-3 col-lg-5 offset-md-2 col-md-8 offset-sm-1 col-sm-10" src="{{ myCard.image }}" alt="">
+        <div class="offset-1 col-8 col-lg-6 col-md-12 mrg-top">
           <h3>{{ myCard.name }}</h3>
           <div class="mrg-top">{{ myCard.set }}</div>
           <div class="mrg-top">{{ myCard.rarity }}</div>
-        <div class="mrg-top">
-          <span *ngFor="let color of myCard.colors"><i class="fa-solid fa-circle {{color}}"></i></span>
-        </div>
-        <div class="mrg-top">
-          <app-card-form [typeCardForm]="typeCardForm" [myCard]="myCard" (sendPrice)="takePrice($event)" (cartaModificata)="cartaModificata($event)"></app-card-form>
-        </div>
+          <div class="mrg-top">
+            <span *ngFor="let color of myCard.colors"><i class="fa-solid fa-circle {{color}}"></i></span>
+          </div>
+          <div class="mrg-top">
+            <app-card-form [typeCardForm]="typeCardForm" [myCard]="myCard" (sendPrice)="takePrice($event)" (cartaModificata)="cartaModificata($event)"></app-card-form>
+          </div>
           <p class="error" *ngIf="myError.status">*{{myError.message}}</p>
         </div>
     </div>
