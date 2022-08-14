@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import BuyCard from 'src/app/classes/BuyCard';
-import CardPurchased from 'src/app/classes/CardPurchased';
 import Order from 'src/app/classes/Order';
 import IUser from 'src/app/interfaces/IUser';
 import { AuthService } from 'src/app/services/auth.service';
@@ -58,18 +57,15 @@ export class OrderPageComponent implements OnInit {
     if (event.success && this.chooseShipment && this.totalPrice) {
 
       const orderString = new Date().getTime().toString();
-      const order = new Order(
-        this.carrelloCardsArray[0].owner,
-        this.carrelloCardsArray[0].buyer,
-        false,
-        false,
-        orderString,
-        this.chooseShipment,
-        this.totalPrice
-      );
-      const arrayPurchase: CardPurchased[] = this.carrelloCardsArray.map(card =>
-        new CardPurchased(
+      const arrayPurchase: Order[] = this.carrelloCardsArray.map(card =>
+        new Order(
           card.owner,
+          card.buyer,
+          false,
+          false,
+          orderString,
+          this.chooseShipment!,
+          this.totalPrice,
           card.name,
           card.colors,
           card.image,
@@ -80,18 +76,13 @@ export class OrderPageComponent implements OnInit {
           card.mana,
           card.price,
           card.buyQuantity,
-          card.buyer,
-          orderString,
           card.fidelity,
           card.power,
           card.toughness
         )
       );
 
-      this.dashboardService.createNewOrder(order).subscribe(res => {
-
-        // if (res) {
-        // this.cardService.createPurchaseOrder(arrayPurchase).subscribe(res => {
+      this.dashboardService.createNewOrder(arrayPurchase).subscribe(res => {
 
         if (res) {
           this.carrelloService.deleteAllCardToCart(this.username!).subscribe(res => {
@@ -105,14 +96,12 @@ export class OrderPageComponent implements OnInit {
                     icon: 'success',
                     confirmButtonText: 'Ok'
                   })
-                  this.router.navigateByUrl('/vendite')
+                  this.router.navigateByUrl('/acquisti/pending')
                 }
               })
             }
           })
         }
-        // })
-        // }
       })
 
     }

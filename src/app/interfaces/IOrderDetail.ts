@@ -1,0 +1,26 @@
+export default interface IOrderDetail {
+  buyer: string,
+  shipped: boolean,
+  receipts: boolean,
+  order: string,
+  chooseSchipment: string,
+  totalPrice: number,
+  totalSeller: number,
+  sellerConfirm: string[],
+  cards: {
+    owner: string,
+    name: string,
+    colors: string[],
+    image: string,
+    text: string,
+    types: string[],
+    set: string,
+    rarity: string,
+    mana: number,
+    price: number,
+    buyQuantity: number,
+    fidelity?: string,
+    power?: string,
+    toughness?: string,
+  }
+}

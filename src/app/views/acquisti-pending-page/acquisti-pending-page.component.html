@@ -1,1 +1,6 @@
-<p>acquisti-pending-page works!</p>
+<section class="section">
+  <ng-container *ngIf="ordersBuyer">
+    <app-order-list [ordersBuyer]="ordersBuyer"></app-order-list>
+  </ng-container>
+</section>
+

@@ -13,6 +13,9 @@ import { NgxBraintreeModule } from 'ngx-braintree';
 import { HttpClientModule } from '@angular/common/http';
 import { AcquistiPendingPageComponent } from '../../views/acquisti-pending-page/acquisti-pending-page.component';
 import { CarteVendutePageComponent } from '../../views/carte-vendute-page/carte-vendute-page.component';
+import { CarteAcquistatePageComponent } from '../../views/carte-acquistate-page/carte-acquistate-page.component';
+import { OrderListComponent } from '../../components/order-list/order-list.component';
+import { OrderDetailComponent } from '../../components/order-detail/order-detail.component';
 
 
 @NgModule({
@@ -24,6 +27,9 @@ import { CarteVendutePageComponent } from '../../views/carte-vendute-page/carte-
     OrderPageComponent,
     AcquistiPendingPageComponent,
     CarteVendutePageComponent,
+    CarteAcquistatePageComponent,
+    OrderListComponent,
+    OrderDetailComponent,
   ],
   imports: [
     CommonModule,

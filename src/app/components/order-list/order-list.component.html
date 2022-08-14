@@ -1,0 +1,14 @@
+<ng-container *ngIf="ordersBuyer">
+  <!-- <app-order-detail *ngFor="let orderBuyer of ordersBuyer" [orderBuyer]="orderBuyer"></app-order-detail> -->
+  <!-- {{ordersBuyer}} -->
+  <ng-container *ngIf="ordersPending">
+    <h2>Ordini in attesa: {{ordersPending.length}}</h2>
+    <app-order-detail *ngFor="let orderPending of ordersPending" [orderPending]="orderPending"></app-order-detail>
+  </ng-container>
+
+  <ng-container *ngIf="ordersReceipts">
+    <h2>Ordini ricevuti: {{ordersReceipts.length}}</h2>
+    <app-order-detail *ngFor="let orderReceipts of ordersReceipts" [orderReceipts]="orderReceipts"></app-order-detail>
+  </ng-container>
+
+</ng-container>

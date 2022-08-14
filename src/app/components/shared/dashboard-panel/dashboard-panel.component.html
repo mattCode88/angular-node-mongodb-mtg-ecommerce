@@ -48,6 +48,7 @@
     </li>
     <li [ngClass]="selezionato === 'acquisti' ? 'blue-dark' : 'blue-nav'">
       <a
+      routerLink="/acquisti/pending"
       (click)="closeMenuVendite()"
       (click)="changeColor('acquisti')"
       class="pointer">

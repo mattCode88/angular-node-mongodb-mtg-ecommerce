@@ -28,9 +28,4 @@ router.put('/card/modifica', cardController.updateCard);
 
 router.put('/card/modifica/many', cardController.updateManyCard);
 
-router.post('/card/purchase/add', cardController.createPurchaseOrder);
-
-
-
-
 module.exports = router;
